@@ -283,7 +283,7 @@
         }
         
         .section-transition-in {
-            animation: sectionTransitionIn 0.6s ease-out 0.1s forwards;
+            animation: sectionTransitionIn 0.3s ease-out forwards;
         }
         
         /* Animar elementos dentro de secciones durante transición */
@@ -297,7 +297,7 @@
         
         .section-transition-in h2,
         .section-transition-in h1 {
-            animation: slideInLeft 0.7s ease-out 0.2s both;
+            animation: slideInLeft 0.4s ease-out 0.05s both;
         }
         
         .section-transition-in .evidence-card {
@@ -305,15 +305,15 @@
         }
         
         .section-transition-in .evidence-card:nth-child(1) {
-            animation-delay: 0.3s;
+            animation-delay: 0.08s;
         }
         
         .section-transition-in .evidence-card:nth-child(2) {
-            animation-delay: 0.4s;
+            animation-delay: 0.12s;
         }
         
         .section-transition-in .evidence-card:nth-child(3) {
-            animation-delay: 0.5s;
+            animation-delay: 0.16s;
         }
         
         .section-fade {
@@ -448,7 +448,7 @@
         
         /* Separadores de sección visibles */
         section {
-            scroll-margin-top: 60px;
+            scroll-margin-top: 0px;
         }
         
         .nav-arrows {
@@ -585,11 +585,11 @@
         
         /* Estilo especial para elementos dentro de secciones fade-in */
         .fade-in-section h2 {
-            animation: slideInLeft 0.8s ease-out 0.1s both;
+            animation: slideInLeft 0.5s ease-out both;
         }
         
         .fade-in-section h1 {
-            animation: slideInLeft 0.8s ease-out 0.2s both;
+            animation: slideInLeft 0.5s ease-out both;
         }
         
         .fade-in-section .space-y-6 > div {
@@ -597,15 +597,15 @@
         }
         
         .fade-in-section .space-y-6 > div:nth-child(1) {
-            animation-delay: 0.2s;
+            animation-delay: 0.05s;
         }
         
         .fade-in-section .space-y-6 > div:nth-child(2) {
-            animation-delay: 0.4s;
+            animation-delay: 0.1s;
         }
         
         .fade-in-section .space-y-6 > div:nth-child(3) {
-            animation-delay: 0.6s;
+            animation-delay: 0.15s;
         }
         
         /* Grid items con animación de escalonado */
@@ -614,15 +614,15 @@
         }
         
         .grid > div:nth-child(1) {
-            animation-delay: 0.1s;
+            animation-delay: 0.05s;
         }
         
         .grid > div:nth-child(2) {
-            animation-delay: 0.3s;
+            animation-delay: 0.08s;
         }
         
         .grid > div:nth-child(3) {
-            animation-delay: 0.5s;
+            animation-delay: 0.12s;
         }
     </style>
 </head>
@@ -693,7 +693,7 @@
             <div class="section-number">[ 02 / 07 ]</div>
         </div>
         <div class="max-w-4xl mx-auto fade-in-section section-fade">
-            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">La Problemática</h2>
+            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif"> ¿Qué está sucediendo? </h2>
             <p class="text-amber-400 text-sm tracking-widest font-mono mb-12">[ EL MURO DE DATOS ]</p>
             
             <div class="space-y-6">
@@ -755,43 +755,55 @@
         <div class="absolute top-8 left-8">
             <div class="section-number">[ 03 / 07 ]</div>
         </div>
-        <div class="max-w-5xl mx-auto fade-in-section section-fade w-full">
+        <div class="max-w-7xl mx-auto fade-in-section section-fade w-full">
             <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">Impacto y Evidencia</h2>
             <p class="text-amber-400 text-sm tracking-widest font-mono mb-12">[ LAS CONSECUENCIAS MEDIBLES ]</p>
             
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="stat-highlight">
-                    <div class="accent-yellow">↗CRECIMIENTO</div>
-                    <p class="text-gray-300">Bandas criminales organizadas en expansión constante por red vial nacional</p>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <!-- Columna Izquierda: Contenido -->
+                <div class="space-y-8">
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="stat-highlight">
+                            <div class="accent-yellow">↗CRECIMIENTO</div>
+                            <p class="text-gray-300">Bandas criminales organizadas en expansión constante por red vial nacional</p>
+                        </div>
+                        
+                        <div class="stat-highlight">
+                            <div class="accent-yellow">ARCHIVOS</div>
+                            <p class="text-gray-300">Alta tasa de causas archivadas sin avances investigativos previos</p>
+                        </div>
+                        
+                        <div class="stat-highlight">
+                            <div class="accent-yellow">SENSACIÓN</div>
+                            <p class="text-gray-300">Profunda sensación de impunidad en la población (ODS 16 comprometido)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="noir-divider w-full"></div>
                 </div>
                 
-                <div class="stat-highlight">
-                    <div class="accent-yellow">ARCHIVOS</div>
-                    <p class="text-gray-300">Alta tasa de causas archivadas sin avances investigativos previos</p>
+                <!-- Columna Derecha: Imagen y Red de Carreteras -->
+                <div class="space-y-6 flex flex-col">
+                    <div class="flex items-center justify-center">
+                        <img src="mapa.png" alt="Mapa de Chile" class="w-full h-auto object-contain rounded-lg glow-border border border-amber-500/30 shadow-2xl" style="max-height: 400px;">
+                    </div>
+                    
+                    <div class="evidence-card p-6 rounded-lg">
+                        <h3 class="text-lg font-bold text-gray-100 mb-3 flex items-center gap-3">
+                            <span class="text-amber-400">📍</span>
+                            Red de Carreteras: Puntos Críticos
+                        </h3>
+                        <p class="text-gray-400 mb-3 text-sm">
+                            Las bandas itinerantes se desplazan sin restricción por la red vial nacional, operando desde puntos estratégicos:
+                        </p>
+                        <ul class="space-y-1 text-xs text-gray-500 font-mono">
+                            <li>🔴 NORTE: Ruta 5 Norte - Actividad crítica</li>
+                            <li>🟠 CENTRAL: Región Metropolitana - Mayor densidad delictual</li>
+                            <li>🔴 SUR: Ruta 5 Sur - Corredor importante</li>
+                            <li>🟡 AUSTRAL: Carretera Austral - En expansión</li>
+                        </ul>
+                    </div>
                 </div>
-                
-                <div class="stat-highlight">
-                    <div class="accent-yellow">SENSACIÓN</div>
-                    <p class="text-gray-300">Profunda sensación de impunidad en la población (ODS 16 comprometido)</p>
-                </div>
-            </div>
-            
-            <div class="noir-divider w-full my-12"></div>
-            
-            <div class="evidence-card p-8 rounded-lg">
-                <h3 class="text-xl font-bold text-gray-100 mb-4 flex items-center gap-3">
-                    <span class="text-amber-400">📍</span>
-                    Red de Carreteras: Puntos Críticos
-                </h3>
-                <p class="text-gray-400 mb-4">
-                    Las bandas itinerantes se desplazan sin restricción por la red vial nacional, operando desde puntos estratégicos:
-                </p>
-                <ul class="space-y-2 text-sm text-gray-500 font-mono">
-                    <li>🔴 NORTE: Ruta 5 Norte - Actividad crítica</li>
-                    <li>🟠 CENTRAL: Región Metropolitana - Mayor densidad delictual</li>
-                    <li>🔴 SUR: Ruta 5 Sur - Corredor importante</li>
-                    <li>🟡 AUSTRAL: Carretera Austral - En expansión</li>
-                </ul>
             </div>
         </div>
         
@@ -945,52 +957,86 @@
             <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">Oportunidad y Sello Deep Tech</h2>
             <p class="text-green-400 text-sm tracking-widest font-mono mb-12">[ DESAFÍO TÉCNICO SIN SOLUCIÓN OBVIA ]</p>
             
-            <div class="evidence-card p-8 rounded-lg mb-8 border-l-4 border-green-500">
-                <h3 class="text-xl font-bold text-gray-100 mb-4 italic">
-                    "Necesitamos ojos que vean patrones, no solo palabras. Una tecnología capaz de entender la jerga de la calle y conectar un 'asaltante con herida en la cara' en Arica con un 'sujeto con cicatriz' en Valparaíso."
-                </h3>
-                <p class="text-gray-400">
-                    El desafío técnico radica en crear un sistema que comprenda contexto criminal, ignore errores de redacción, y detecte entidades de forma autónoma mediante Modelos de Lenguaje.
-                </p>
-            </div>
+
             
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div class="stat-highlight text-left">
-                    <div class="text-amber-400 font-mono text-xs tracking-widest mb-2">TRL INICIAL</div>
-                    <div class="text-5xl font-bold text-amber-400 mb-2">2</div>
-                    <p class="text-sm text-gray-300">Concepto de tecnología validado</p>
+            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                <div class="stat-highlight text-left min-h-0 py-4 px-6 gap-2">
+                    <div class="text-amber-400 font-mono text-xs tracking-widest mb-1">TRL INICIAL</div>
+                    <div class="text-3xl font-bold text-amber-400 mb-1">2</div>
+                    <p class="text-xs text-gray-300">Concepto de tecnología validado</p>
                 </div>
                 
-                <div class="stat-highlight text-left">
-                    <div class="text-green-400 font-mono text-xs tracking-widest mb-2">ODS OBJETIVO</div>
-                    <div class="text-5xl font-bold text-green-400 mb-2">16</div>
-                    <p class="text-sm text-gray-300">Paz, Justicia e Instituciones Sólidas</p>
+                <div class="stat-highlight text-left min-h-0 py-4 px-6 gap-2">
+                    <div class="text-green-400 font-mono text-xs tracking-widest mb-1">ODS OBJETIVO</div>
+                    <div class="text-3xl font-bold text-green-400 mb-1">16</div>
+                    <p class="text-xs text-gray-300">Paz, Justicia e Instituciones Sólidas</p>
                 </div>
             </div>
             
-            <div class="space-y-4">
+            <div class="space-y-4 mb-12">
                 <div class="evidence-card p-6 rounded-lg">
                     <h3 class="font-bold text-gray-100 mb-2 flex items-center gap-2">
                         <span class="text-amber-400">🧠</span>
-                        Comprensión de Jerga Criminal
+                        Base Científica: NLP & Vectores
                     </h3>
-                    <p class="text-gray-400 text-sm">IA entrenada en contexto legal chileno para reconocer "coas", modismos y variaciones lingüísticas criminales</p>
+                    <p class="text-gray-400 text-sm">Transformamos narrativas policiales no estructuradas en representaciones matemáticas (embeddings) para calcular similitud semántica profunda, superando la búsqueda de coincidencias exactas.</p>
                 </div>
                 
                 <div class="evidence-card p-6 rounded-lg">
                     <h3 class="font-bold text-gray-100 mb-2 flex items-center gap-2">
-                        <span class="text-amber-400">🔗</span>
-                        Detección Autónoma de Patrones
+                        <span class="text-amber-400">⚠️</span>
+                        Incertidumbre: Contexto y 'Coa'
                     </h3>
-                    <p class="text-gray-400 text-sm">Identificar conexiones entre denuncias sin supervisión humana, reconociendo variaciones en descripción de identidades y modus operandi</p>
+                    <p class="text-gray-400 text-sm">El mayor desafío algorítmico es entrenar el modelo para interpretar la jerga criminal chilena, errores ortográficos y variaciones de redacción, minimizando falsos positivos en un entorno crítico.</p>
                 </div>
                 
                 <div class="evidence-card p-6 rounded-lg">
                     <h3 class="font-bold text-gray-100 mb-2 flex items-center gap-2">
-                        <span class="text-amber-400">📊</span>
-                        Scoring de Similitud Semántica
+                        <span class="text-amber-400">🛡️</span>
+                        Ventaja Defendible: Modelo Fine-Tuned
                     </h3>
-                    <p class="text-gray-400 text-sm">Modelar textos narrativos como vectores para conectar conceptos similares, no palabras exactas</p>
+                    <p class="text-gray-400 text-sm">Construimos un 'moat' tecnológico mediante un motor entrenado exclusivamente con corpus delictual local, una precisión que los modelos comerciales genéricos no pueden replicar.</p>
+                </div>
+            </div>
+            
+            <!-- Análisis de Brecha Tecnológica -->
+            <div class="evidence-card p-8 rounded-lg">
+                <h3 class="text-xl font-bold text-gray-100 mb-8 text-center italic">Análisis de Brecha Tecnológica</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Status Quo -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-red-400 text-2xl">❌</span>
+                            <h4 class="font-bold text-gray-100 text-lg">Status Quo</h4>
+                        </div>
+                        <div class="bg-red-500/10 border border-red-500/30 rounded p-4">
+                            <p class="text-gray-300 font-mono text-sm">
+                                <span class="text-red-400 font-bold">Búsqueda Relacional/Booleana</span>
+                                <br class="my-2">
+                                SQL estándar con queries exactas.
+                                <br class="my-2">
+                                <span class="text-xs text-gray-400 italic">Depende de que el analista sepa exactamente qué palabra buscar.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Nuestra Solución -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-green-400 text-2xl">✓</span>
+                            <h4 class="font-bold text-gray-100 text-lg">Nuestra Solución</h4>
+                        </div>
+                        <div class="bg-green-500/10 border border-green-500/30 rounded p-4">
+                            <p class="text-gray-300 font-mono text-sm">
+                                <span class="text-green-400 font-bold">Búsqueda Semántica Proactiva</span>
+                                <br class="my-2">
+                                IA detecta patrones sin query explícita.
+                                <br class="my-2">
+                                <span class="text-xs text-gray-400 italic">El sistema identifica conexiones ocultas autónomamente.</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1011,13 +1057,13 @@
     </section>
 
     <!-- SECCIÓN 7: CIERRE - La Frase de Oportunidad -->
-    <section id="section-7" class="min-h-screen grid-pattern flex items-center justify-center px-4 py-20 relative bg-gradient-to-b from-black to-slate-950 border-t-2 border-amber-500/20">
+    <section id="section-7" class="min-h-screen grid-pattern flex items-center justify-center px-4 py-20 relative bg-gradient-to-b from-black to-slate-950">
         <div class="absolute top-8 left-8">
             <div class="section-number">[ 07 / 07 ]</div>
         </div>
         <div class="max-w-4xl mx-auto text-center fade-in-section section-fade mt-12">
             <div class="mb-8">
-                <p class="text-amber-400 text-sm tracking-widest font-mono mb-6">❓ LA PREGUNTA FUNDAMENTAL</p>
+                <p class="text-amber-400 text-sm tracking-widest font-mono mb-6"> LA PREGUNTA FUNDAMENTAL</p>
             </div>
             
             <h2 class="text-4xl md:text-5xl font-bold text-gray-100 mb-8 font-serif leading-tight">
@@ -1033,8 +1079,6 @@
                 <br>
                 <span class="accent-yellow font-bold">en tiempo récord</span>
             </p>
-            
-            <div class="noir-divider w-32 mx-auto my-12"></div>
             
             <p class="text-lg text-gray-400 mb-12 italic">
                 "La pregunta no es si el crimen se detendrá, sino si seremos lo suficientemente rápidos para verlo venir."
@@ -1099,8 +1143,8 @@
                     setTimeout(() => {
                         targetSection.classList.remove('section-transition-in');
                         currentSection.classList.remove('section-transition-out');
-                    }, 600);
-                }, 500);
+                    }, 300);
+                }, 50);
             }
         }
         
@@ -1117,7 +1161,7 @@
                     
                     // Actualizar elemento activo en navegación flotante
                     updateFloatingNav(targetId);
-                }, 300);
+                }, 50);
             });
         });
         
@@ -1158,7 +1202,7 @@
                     
                     setTimeout(() => {
                         nextSection.scrollIntoView({ behavior: 'smooth' });
-                    }, 300);
+                    }, 50);
                 }
             });
         });
