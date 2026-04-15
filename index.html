@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragmentación de Datos Delictuales en Chile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #f59e0b #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #f59e0b;
+            border-radius: 4px;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap');
+        
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: #0a0a0a;
+            color: #d1d5db;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(245, 158, 11, 0.03) 0px,
+                    rgba(245, 158, 11, 0.03) 2px,
+                    transparent 2px,
+                    transparent 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(245, 158, 11, 0.02) 0px,
+                    rgba(245, 158, 11, 0.02) 40px,
+                    transparent 40px,
+                    transparent 80px
+                );
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+            box-shadow: 0 0 20px #f59e0b, 0 0 40px rgba(245, 158, 11, 0.6);
+            animation: scan 3s infinite, glowPulse 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes scan {
+            0% { top: 0%; }
+            50% { top: 50%; }
+            100% { top: 0%; }
+        }
+        
+        .evidence-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.6) 0%, rgba(17, 24, 39, 0.6) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-left: 3px solid #f59e0b;
+            position: relative;
+            overflow: hidden;
+            animation: scaleInCard 0.6s ease-out;
+        }
+        
+        .evidence-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(245, 158, 11, 0.05) 2px,
+                    rgba(245, 158, 11, 0.05) 4px
+                );
+            pointer-events: none;
+        }
+        
+        .noir-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.5), transparent);
+            margin: 2rem 0;
+            animation: borderFlowLeft 3s ease-in-out infinite;
+        }
+        
+        .noir-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.8), transparent);
+            animation: borderFlowRight 3s ease-in-out infinite;
+        }
+        
+        .title-forensic {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            background: linear-gradient(135deg, #f3f4f6 0%, #d1d5db 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .accent-yellow {
+            color: #f59e0b;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(0deg, transparent 24%, rgba(245, 158, 11, 0.05) 25%, rgba(245, 158, 11, 0.05) 26%, transparent 27%, transparent 74%, rgba(245, 158, 11, 0.05) 75%, rgba(245, 158, 11, 0.05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(245, 158, 11, 0.05) 25%, rgba(245, 158, 11, 0.05) 26%, transparent 27%, transparent 74%, rgba(245, 158, 11, 0.05) 75%, rgba(245, 158, 11, 0.05) 76%, transparent 77%, transparent);
+            background-size: 60px 60px;
+            background-position: 0 0;
+        }
+        
+        .glow-border {
+            box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.1), 0 0 20px rgba(245, 158, 11, 0.05);
+        }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes drawBorder {
+            0% {
+                background-size: 0% 100%;
+            }
+            100% {
+                background-size: 100% 100%;
+            }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(245, 158, 11, 0.3), inset 0 0 15px rgba(245, 158, 11, 0.05);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), inset 0 0 25px rgba(245, 158, 11, 0.1);
+            }
+        }
+        
+        @keyframes typewriter {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes borderFlowLeft {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        @keyframes arrowPulse {
+            0%, 100% {
+                transform: translateY(0);
+                filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.4));
+            }
+            50% {
+                transform: translateY(-8px);
+                filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.8));
+            }
+        }
+        
+        .animate-bounce {
+            animation: arrowPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes scaleInCard {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes sectionTransitionOut {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+        }
+        
+        @keyframes sectionTransitionIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .section-transition-out {
+            animation: sectionTransitionOut 0.5s ease-out forwards;
+        }
+        
+        .section-transition-in {
+            animation: sectionTransitionIn 0.6s ease-out 0.1s forwards;
+        }
+        
+        /* Animar elementos dentro de secciones durante transición */
+        section h2,
+        section h1,
+        section .evidence-card,
+        section .stat-highlight,
+        section .actor-badge {
+            transform-origin: center;
+        }
+        
+        .section-transition-in h2,
+        .section-transition-in h1 {
+            animation: slideInLeft 0.7s ease-out 0.2s both;
+        }
+        
+        .section-transition-in .evidence-card {
+            animation: scaleInCard 0.6s ease-out forwards;
+        }
+        
+        .section-transition-in .evidence-card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+        
+        .section-transition-in .evidence-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        
+        .section-transition-in .evidence-card:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+        
+        .section-fade {
+            animation-delay: 0.2s;
+        }
+        
+        .section-number {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 6px;
+            padding: 0.5rem 1.25rem;
+            display: inline-block;
+            animation: slideInLeft 0.6s ease-out;
+            font-weight: 600;
+            color: #f59e0b;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+        }
+        
+        .actor-badge {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            animation: slideInRight 0.7s ease-out;
+        }
+        
+        .actor-badge:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.08) 100%);
+        }
+        
+        .typewriter-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+        }
+        
+        .stat-highlight {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 2.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1);
+            animation: scaleInCard 0.7s ease-out forwards;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+            min-height: 220px;
+        }
+        
+        .stat-highlight > div:first-child {
+            font-size: 2rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .stat-highlight > p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Responsive grid para stat-highlight */
+        @media (max-width: 1024px) {
+            .stat-highlight {
+                min-height: 180px;
+                padding: 2rem 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #section-3 > div:nth-child(2) > div:first-of-type {
+                gap: 1.5rem !important;
+            }
+            
+            .stat-highlight {
+                min-height: 160px;
+                padding: 1.5rem 1rem;
+            }
+            
+            .stat-highlight > div:first-child {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .pulse-warning {
+            animation: pulse-warn 2s infinite;
+        }
+        
+        @keyframes pulse-warn {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #0a0a0a;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            border: 2px solid #f59e0b;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'IBM Plex Mono', monospace;
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px) scale(1.05);
+            letter-spacing: 0.15em;
+        }
+        
+        .cta-button:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        
+        /* Separadores de sección visibles */
+        section {
+            scroll-margin-top: 60px;
+        }
+        
+        .nav-arrows {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border-top: 1px solid rgba(245, 158, 11, 0.3);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 2rem 0;
+            display: none;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .nav-arrows a {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-arrows a:hover svg {
+            filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.8));
+        }
+        
+        .nav-arrows a:active {
+            transform: scale(0.9);
+        }
+        
+        /* Efecto de clic en flechas */
+        @keyframes clickRipple {
+            0% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 30px rgba(245, 158, 11, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+            }
+        }
+        
+        .nav-arrows a:active::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: clickRipple 0.6s ease-out;
+        }
+        
+        /* Navegación flotante a la derecha */
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 50px;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(245, 158, 11, 0.1);
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        .floating-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #f59e0b;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 700;
+            font-size: 1.1rem;
+            font-family: 'IBM Plex Mono', monospace;
+            text-decoration: none;
+        }
+        
+        .floating-nav a:hover {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.4) 0%, rgba(245, 158, 11, 0.15) 100%);
+            border-color: #f59e0b;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6), inset 0 0 15px rgba(245, 158, 11, 0.2);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+        }
+        
+        .floating-nav a:active {
+            transform: scale(0.95);
+        }
+        
+        /* Divisor entre botones */
+        .floating-nav .nav-divider {
+            width: 24px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.4), transparent);
+            margin: 0.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .floating-nav {
+                right: 1rem;
+                padding: 1rem 0.75rem;
+                gap: 1rem;
+            }
+            
+            .floating-nav a {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        /* Indicador de sección actual */
+        .floating-nav a.active {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.6) 0%, rgba(245, 158, 11, 0.3) 100%);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.3);
+            border-color: #f59e0b;
+            color: #ffffe0;
+            text-shadow: 0 0 15px rgba(245, 158, 11, 1), 0 0 30px rgba(245, 158, 11, 0.6);
+            transform: scale(1.15);
+        }
+        
+        .floating-nav a.active:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Estilo especial para elementos dentro de secciones fade-in */
+        .fade-in-section h2 {
+            animation: slideInLeft 0.8s ease-out 0.1s both;
+        }
+        
+        .fade-in-section h1 {
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+        
+        .fade-in-section .space-y-6 > div {
+            animation: scaleInCard 0.6s ease-out forwards;
+        }
+        
+        .fade-in-section .space-y-6 > div:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        
+        .fade-in-section .space-y-6 > div:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        
+        .fade-in-section .space-y-6 > div:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        /* Grid items con animación de escalonado */
+        .grid > div {
+            animation: scaleInCard 0.7s ease-out forwards;
+        }
+        
+        .grid > div:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .grid > div:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .grid > div:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+    </style>
+</head>
+<body class="content-wrapper">
+
+    <!-- Navegación Flotante a la Derecha -->
+    <div class="floating-nav">
+        <a href="#section-1" class="floating-nav-link active" data-section="1" title="Sección 1">1</a>
+        <div class="nav-divider"></div>
+        <a href="#section-2" class="floating-nav-link" data-section="2" title="Sección 2">2</a>
+        <a href="#section-3" class="floating-nav-link" data-section="3" title="Sección 3">3</a>
+        <a href="#section-4" class="floating-nav-link" data-section="4" title="Sección 4">4</a>
+        <a href="#section-5" class="floating-nav-link" data-section="5" title="Sección 5">5</a>
+        <a href="#section-6" class="floating-nav-link" data-section="6" title="Sección 6">6</a>
+        <a href="#section-7" class="floating-nav-link" data-section="7" title="Sección 7">7</a>
+    </div>
+
+    <!-- SECCIÓN 1: HERO - El Archivo No Resuelto -->
+    <section id="section-1" class="min-h-screen grid-pattern flex items-center justify-center px-4 py-20 relative border-b-2 border-amber-500/20">
+        <div class="scanner-line"></div>
+        
+        <div class="max-w-4xl mx-auto text-center fade-in-section">
+            <div class="absolute top-8 left-8">
+                <div class="section-number">[ 01 / 07 ]</div>
+            </div>
+            <div class="mb-8">
+                <div class="inline-block px-4 py-2 border border-amber-500 rounded mb-6">
+                    <span class="text-amber-400 font-mono text-sm tracking-widest">📁 CASO ABIERTO</span>
+                </div>
+            </div>
+            
+            <h1 class="title-forensic mb-6">
+                FRAGMENTACIÓN
+                <br>
+                <span class="accent-yellow">DE DATOS</span>
+                <br>
+                DELICTUALES
+            </h1>
+            
+            <p class="text-2xl text-gray-300 mb-4 font-light italic">en Chile</p>
+            
+            <div class="noir-divider w-32 mx-auto"></div>
+            
+            <p class="text-xl text-gray-400 mb-8 italic font-light">
+                "Donde el crimen se conecta, pero la información permanece aislada"
+            </p>
+            
+            <p class="text-base text-gray-500 max-w-2xl mx-auto leading-relaxed mb-12">
+                En las sombras de la red vial, el rastro se enfría. Miles de historias de injusticia se pierden entre expedientes que nadie puede conectar. Bienvenido al escritorio donde los datos sobran, pero el tiempo se agota.
+            </p>
+            
+            <button class="cta-button">Iniciar Investigación</button>
+        </div>
+        
+        <!-- Navegación -->
+        <div class="nav-arrows">
+            <a href="#section-2" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: LA PROBLEMÁTICA - El Muro de Datos -->
+    <section id="section-2" class="min-h-screen py-20 px-4 bg-gradient-to-b from-slate-950 to-black border-b-2 border-amber-500/20 relative flex flex-col justify-center">
+        <div class="absolute top-8 left-8">
+            <div class="section-number">[ 02 / 07 ]</div>
+        </div>
+        <div class="max-w-4xl mx-auto fade-in-section section-fade">
+            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">La Problemática</h2>
+            <p class="text-amber-400 text-sm tracking-widest font-mono mb-12">[ EL MURO DE DATOS ]</p>
+            
+            <div class="space-y-6">
+                <div class="evidence-card p-6 rounded-lg">
+                    <div class="flex gap-4">
+                        <div class="text-amber-400 flex-shrink-0 mt-1">⚠️</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-2">Fragmentación Información</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                La información delictual está dispersa en miles de denuncias narrativas no estructuradas. Cada expediente es un isla de datos, desconectada de las otras.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="evidence-card p-6 rounded-lg">
+                    <div class="flex gap-4">
+                        <div class="text-gray-600 flex-shrink-0 mt-1">📋</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-2">Límite Cognitivo Humano</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Procesar manualmente miles de denuncias narrativas es <span class="accent-yellow">prácticamente imposible</span> para el cerebro humano. Se pierden conexiones cruciales en el volumen puro.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="evidence-card p-6 rounded-lg pulse-warning">
+                    <div class="flex gap-4">
+                        <div class="text-red-400 flex-shrink-0 mt-1">🚨</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-2">Resultado: Impunidad</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Esta fragmentación permite que el crimen organizado opere con impunidad. Las bandas itinerantes cometen el mismo delito una y otra vez bajo diferentes alias, sin ser detectadas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <div class="nav-arrows">
+            <a href="#section-1" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+            </a>
+            <a href="#section-3" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: IMPACTO Y EVIDENCIA - Las Consecuencias -->
+    <section id="section-3" class="min-h-screen py-20 px-4 bg-black border-b-2 border-amber-500/20 relative flex flex-col justify-center">
+        <div class="absolute top-8 left-8">
+            <div class="section-number">[ 03 / 07 ]</div>
+        </div>
+        <div class="max-w-5xl mx-auto fade-in-section section-fade w-full">
+            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">Impacto y Evidencia</h2>
+            <p class="text-amber-400 text-sm tracking-widest font-mono mb-12">[ LAS CONSECUENCIAS MEDIBLES ]</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="stat-highlight">
+                    <div class="accent-yellow">↗️ CRECIMIENTO</div>
+                    <p class="text-gray-300">Bandas criminales organizadas en expansión constante por red vial nacional</p>
+                </div>
+                
+                <div class="stat-highlight">
+                    <div class="accent-yellow">📉 ARCHIVOS</div>
+                    <p class="text-gray-300">Alta tasa de causas archivadas sin avances investigativos previos</p>
+                </div>
+                
+                <div class="stat-highlight">
+                    <div class="accent-yellow">😔 SENSACIÓN</div>
+                    <p class="text-gray-300">Profunda sensación de impunidad en la población (ODS 16 comprometido)</p>
+                </div>
+            </div>
+            
+            <div class="noir-divider w-full my-12"></div>
+            
+            <div class="evidence-card p-8 rounded-lg">
+                <h3 class="text-xl font-bold text-gray-100 mb-4 flex items-center gap-3">
+                    <span class="text-amber-400">📍</span>
+                    Red de Carreteras: Puntos Críticos
+                </h3>
+                <p class="text-gray-400 mb-4">
+                    Las bandas itinerantes se desplazan sin restricción por la red vial nacional, operando desde puntos estratégicos:
+                </p>
+                <ul class="space-y-2 text-sm text-gray-500 font-mono">
+                    <li>🔴 NORTE: Ruta 5 Norte - Actividad crítica</li>
+                    <li>🟠 CENTRAL: Región Metropolitana - Mayor densidad delictual</li>
+                    <li>🔴 SUR: Ruta 5 Sur - Corredor importante</li>
+                    <li>🟡 AUSTRAL: Carretera Austral - En expansión</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <div class="nav-arrows">
+            <a href="#section-2" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+            </a>
+            <a href="#section-4" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: CONTEXTO Y ACTORES - El Tablero de Investigación -->
+    <section id="section-4" class="min-h-screen py-20 px-4 bg-gradient-to-b from-black to-slate-950 border-b-2 border-amber-500/20 relative flex flex-col justify-center">
+        <div class="absolute top-8 left-8">
+            <div class="section-number">[ 04 / 07 ]</div>
+        </div>
+        <div class="max-w-5xl mx-auto fade-in-section section-fade">
+            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">Contexto y Actores</h2>
+            <p class="text-amber-400 text-sm tracking-widest font-mono mb-12">[ EL TABLERO DE INVESTIGACIÓN ]</p>
+            
+            <p class="text-gray-300 mb-12 leading-relaxed">
+                En este juego, todos pierden. Los fiscales se hunden en el papeleo, los analistas buscan agujas en pajares de texto, y las víctimas reciben notificaciones frías de archivos provisionales.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="actor-badge">
+                    <div class="text-3xl mb-4">⚖️</div>
+                    <h3 class="text-lg font-bold text-gray-100 mb-2">Fiscales</h3>
+                    <p class="text-gray-400 text-sm">Ministerio Público - Quiénes deciden y cierran investigaciones</p>
+                    <div class="mt-4 pt-4 border-t border-amber-500/20">
+                        <p class="text-xs text-amber-300 font-mono">STATUS: Abrumados</p>
+                    </div>
+                </div>
+                
+                <div class="actor-badge">
+                    <div class="text-3xl mb-4">🔍</div>
+                    <h3 class="text-lg font-bold text-gray-100 mb-2">Analistas</h3>
+                    <p class="text-gray-400 text-sm">PDI & Carabineros - Investigadores en campo</p>
+                    <div class="mt-4 pt-4 border-t border-amber-500/20">
+                        <p class="text-xs text-amber-300 font-mono">STATUS: Frustrados</p>
+                    </div>
+                </div>
+                
+                <div class="actor-badge">
+                    <div class="text-3xl mb-4">👥</div>
+                    <h3 class="text-lg font-bold text-gray-100 mb-2">Víctimas</h3>
+                    <p class="text-gray-400 text-sm">Robos, asaltos, estafas - Afectadas directamente</p>
+                    <div class="mt-4 pt-4 border-t border-amber-500/20">
+                        <p class="text-xs text-red-300 font-mono">STATUS: Olvidadas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <div class="nav-arrows">
+            <a href="#section-3" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+            </a>
+            <a href="#section-5" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: DOLOR DEL USUARIO - La Frustración Real -->
+    <section id="section-5" class="min-h-screen py-20 px-4 bg-slate-950 border-b-2 border-amber-500/20 relative flex flex-col justify-center">
+        <div class="absolute top-8 left-8">
+            <div class="section-number">[ 05 / 07 ]</div>
+        </div>
+        <div class="max-w-4xl mx-auto fade-in-section section-fade">
+            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">El Dolor del Analista</h2>
+            <p class="text-red-400 text-sm tracking-widest font-mono mb-12">[ LA FRUSTRACIÓN REAL ]</p>
+            
+            <div class="space-y-6">
+                <div class="evidence-card p-6 rounded-lg border-l-4 border-red-500">
+                    <h3 class="text-lg font-bold text-gray-100 mb-3">La Pesadilla Cotidiana</h3>
+                    <p class="text-gray-300 leading-relaxed italic">
+                        "Imagina saber que la clave para atrapar a una banda está frente a tus ojos, pero está oculta en la página 4.500 de un archivo que no tienes tiempo de leer. Esa es la realidad diaria de quien busca justicia en Chile."
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="evidence-card p-6 rounded-lg">
+                        <div class="flex items-start gap-3 mb-3">
+                            <span class="text-red-400 text-xl">⏱️</span>
+                            <h3 class="font-bold text-gray-100">Carga de Trabajo</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            Frustración constante por revisar manualmente miles de denuncias buscando conexiones que podrían pasar desapercibidas.
+                        </p>
+                    </div>
+                    
+                    <div class="evidence-card p-6 rounded-lg">
+                        <div class="flex items-start gap-3 mb-3">
+                            <span class="text-red-400 text-xl">💥</span>
+                            <h3 class="font-bold text-gray-100">Riesgo de Omisión</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            El miedo a perder una conexión crucial que podría resolver un caso y desarticular una red criminal.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="evidence-card p-6 rounded-lg border-l-4 border-amber-500">
+                    <div class="flex items-start gap-3">
+                        <span class="text-amber-400 text-xl">⚠️</span>
+                        <div>
+                            <h3 class="font-bold text-gray-100 mb-2">Impotencia Sistémica</h3>
+                            <p class="text-gray-400">
+                                Incapacidad de escalar análisis. Solo se revisan casos emblemáticos mientras miles de denuncias permanecen sin examinar. Las bandas ganan tiempo mientras se agota el personal.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <div class="nav-arrows">
+            <a href="#section-4" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+            </a>
+            <a href="#section-6" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 6: OPORTUNIDAD DEEP TECH - El Sello -->
+    <section id="section-6" class="min-h-screen py-20 px-4 bg-gradient-to-b from-slate-950 to-black border-b-2 border-amber-500/20 relative flex flex-col justify-center">
+        <div class="absolute top-8 left-8">
+            <div class="section-number">[ 06 / 07 ]</div>
+        </div>
+        <div class="max-w-4xl mx-auto fade-in-section section-fade">
+            <h2 class="text-4xl font-bold text-gray-100 mb-2 font-serif">Oportunidad y Sello Deep Tech</h2>
+            <p class="text-green-400 text-sm tracking-widest font-mono mb-12">[ DESAFÍO TÉCNICO SIN SOLUCIÓN OBVIA ]</p>
+            
+            <div class="evidence-card p-8 rounded-lg mb-8 border-l-4 border-green-500">
+                <h3 class="text-xl font-bold text-gray-100 mb-4 italic">
+                    "Necesitamos ojos que vean patrones, no solo palabras. Una tecnología capaz de entender la jerga de la calle y conectar un 'asaltante con herida en la cara' en Arica con un 'sujeto con cicatriz' en Valparaíso."
+                </h3>
+                <p class="text-gray-400">
+                    El desafío técnico radica en crear un sistema que comprenda contexto criminal, ignore errores de redacción, y detecte entidades de forma autónoma mediante Modelos de Lenguaje.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="stat-highlight text-left">
+                    <div class="text-amber-400 font-mono text-xs tracking-widest mb-2">TRL INICIAL</div>
+                    <div class="text-5xl font-bold text-amber-400 mb-2">2</div>
+                    <p class="text-sm text-gray-300">Concepto de tecnología validado</p>
+                </div>
+                
+                <div class="stat-highlight text-left">
+                    <div class="text-green-400 font-mono text-xs tracking-widest mb-2">ODS OBJETIVO</div>
+                    <div class="text-5xl font-bold text-green-400 mb-2">16</div>
+                    <p class="text-sm text-gray-300">Paz, Justicia e Instituciones Sólidas</p>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="evidence-card p-6 rounded-lg">
+                    <h3 class="font-bold text-gray-100 mb-2 flex items-center gap-2">
+                        <span class="text-amber-400">🧠</span>
+                        Comprensión de Jerga Criminal
+                    </h3>
+                    <p class="text-gray-400 text-sm">IA entrenada en contexto legal chileno para reconocer "coas", modismos y variaciones lingüísticas criminales</p>
+                </div>
+                
+                <div class="evidence-card p-6 rounded-lg">
+                    <h3 class="font-bold text-gray-100 mb-2 flex items-center gap-2">
+                        <span class="text-amber-400">🔗</span>
+                        Detección Autónoma de Patrones
+                    </h3>
+                    <p class="text-gray-400 text-sm">Identificar conexiones entre denuncias sin supervisión humana, reconociendo variaciones en descripción de identidades y modus operandi</p>
+                </div>
+                
+                <div class="evidence-card p-6 rounded-lg">
+                    <h3 class="font-bold text-gray-100 mb-2 flex items-center gap-2">
+                        <span class="text-amber-400">📊</span>
+                        Scoring de Similitud Semántica
+                    </h3>
+                    <p class="text-gray-400 text-sm">Modelar textos narrativos como vectores para conectar conceptos similares, no palabras exactas</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <div class="nav-arrows">
+            <a href="#section-5" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+            </a>
+            <a href="#section-7" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 7: CIERRE - La Frase de Oportunidad -->
+    <section id="section-7" class="min-h-screen grid-pattern flex items-center justify-center px-4 py-20 relative bg-gradient-to-b from-black to-slate-950 border-t-2 border-amber-500/20">
+        <div class="absolute top-8 left-8">
+            <div class="section-number">[ 07 / 07 ]</div>
+        </div>
+        <div class="max-w-4xl mx-auto text-center fade-in-section section-fade mt-12">
+            <div class="mb-8">
+                <p class="text-amber-400 text-sm tracking-widest font-mono mb-6">❓ LA PREGUNTA FUNDAMENTAL</p>
+            </div>
+            
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-100 mb-8 font-serif leading-tight">
+                ¿Cómo podríamos automatizar
+                <br>
+                <span class="accent-yellow">la detección de patrones delictivos</span>
+                <br>
+                en denuncias escritas?
+            </h2>
+            
+            <p class="text-xl text-gray-300 mb-4 italic">
+                Para que los fiscales logren desarticular bandas criminales
+                <br>
+                <span class="accent-yellow font-bold">en tiempo récord</span>
+            </p>
+            
+            <div class="noir-divider w-32 mx-auto my-12"></div>
+            
+            <p class="text-lg text-gray-400 mb-12 italic">
+                "La pregunta no es si el crimen se detendrá, sino si seremos lo suficientemente rápidos para verlo venir."
+            </p>
+            
+            <button class="cta-button mb-12">Continuar Investigación</button>
+            
+            <div class="text-center text-gray-500 text-xs font-mono">
+                <p>[ PROYECTO ACADÉMICO ]</p>
+                <p>Innovación | Emprendimiento | Deep Tech</p>
+            </div>
+            
+            <!-- Navegación -->
+            <div class="nav-arrows">
+                <a href="#section-6" class="text-amber-400 hover:text-amber-300 transition-all hover:scale-110">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+        
+        // Observador para animaciones de fade-in
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in-section').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Función para animar transición de secciones
+        function transitionToSection(targetId) {
+            const currentSection = document.querySelector('section:target') || document.querySelector('section');
+            const targetSection = document.getElementById(targetId);
+            
+            if (!targetSection) return;
+            
+            // Agregar animación de salida
+            if (currentSection && currentSection !== targetSection) {
+                currentSection.classList.add('section-transition-out');
+                
+                // Agregar animación de entrada a la nueva sección
+                setTimeout(() => {
+                    targetSection.classList.remove('section-transition-out');
+                    targetSection.classList.add('section-transition-in');
+                    
+                    // Limpiar clases después de la animación
+                    setTimeout(() => {
+                        targetSection.classList.remove('section-transition-in');
+                        currentSection.classList.remove('section-transition-out');
+                    }, 600);
+                }, 500);
+            }
+        }
+        
+        // Scroll suave con transición
+        document.querySelectorAll('a[href^="#section-"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                transitionToSection(targetId);
+                
+                setTimeout(() => {
+                    const targetSection = document.getElementById(targetId);
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Actualizar elemento activo en navegación flotante
+                    updateFloatingNav(targetId);
+                }, 300);
+            });
+        });
+        
+        // Detectar sección actual al hacer scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id^="section-"]');
+            let currentSection = 'section-1';
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    currentSection = section.id;
+                }
+            });
+            
+            updateFloatingNav(currentSection);
+        });
+        
+        // Función para actualizar navegación flotante
+        function updateFloatingNav(sectionId) {
+            document.querySelectorAll('.floating-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+        
+        // Scroll suave para botones
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', () => {
+                const nextSection = button.closest('section').nextElementSibling;
+                if (nextSection && nextSection.tagName === 'SECTION') {
+                    const targetId = nextSection.id;
+                    transitionToSection(targetId);
+                    
+                    setTimeout(() => {
+                        nextSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
