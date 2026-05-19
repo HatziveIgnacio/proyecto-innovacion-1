@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cerebro Analítico | Inteligencia TRL-9 para Seguridad Pública</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ceef7f",
+                        "secondary-fixed-dim": "#b9c7e4",
+                        "secondary-container": "#3c4962",
+                        "inverse-surface": "#dae3f0",
+                        "inverse-on-surface": "#28313b",
+                        "surface-bright": "#313a44",
+                        "background": "#0a141d",
+                        "on-tertiary": "#322f3c",
+                        "surface-variant": "#2c363f",
+                        "surface-container": "#172129",
+                        "surface-container-low": "#131d25",
+                        "surface-container-high": "#212b34",
+                        "on-tertiary-fixed": "#1d1a26",
+                        "primary": "#ffffff",
+                        "on-secondary-container": "#abb9d6",
+                        "inverse-primary": "#4e6700",
+                        "on-secondary-fixed-variant": "#39475f",
+                        "tertiary-container": "#e6e0f1",
+                        "on-tertiary-fixed-variant": "#484553",
+                        "primary-container": "#ceef7f",
+                        "on-primary-fixed": "#151f00",
+                        "on-primary": "#273500",
+                        "on-surface": "#dae3f0",
+                        "on-secondary": "#233148",
+                        "surface-container-lowest": "#060f17",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "secondary": "#b9c7e4",
+                        "surface-dim": "#0a141d",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#0d1c32",
+                        "on-background": "#dae3f0",
+                        "on-surface-variant": "#c5c8b4",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#8f9380",
+                        "tertiary-fixed-dim": "#cac4d5",
+                        "secondary-fixed": "#d6e3ff",
+                        "surface-container-highest": "#2c363f",
+                        "on-primary-container": "#536d05",
+                        "on-primary-fixed-variant": "#3a4d00",
+                        "surface": "#0a141d",
+                        "outline-variant": "#454839",
+                        "on-tertiary-container": "#666271",
+                        "tertiary": "#ffffff",
+                        "tertiary-fixed": "#e6e0f1",
+                        "primary-fixed-dim": "#b3d266",
+                        "surface-tint": "#b3d266"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "margin-desktop": "48px",
+                        "base": "4px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "data-tabular": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "data-tabular": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #000000; color: #dae3f0; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .tech-grid { background-image: radial-gradient(circle, #1e293b 1px, transparent 1px); background-size: 32px 32px; }
+        .lime-glow:hover { box-shadow: 0 0 15px rgba(206, 239, 127, 0.3); }
+        .hairline-border { border: 1px solid #1e293b; }
+        .gradient-mask { mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="docked full-width top-0 z-50 bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center w-full px-margin-desktop py-md max-w-screen-2xl mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">
+                Cerebro Analítico
+            </div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-primary-fixed font-bold border-b-2 border-primary-fixed pb-1 font-label-caps text-label-caps" href="#">Visión</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed transition-colors font-label-caps text-label-caps" href="#">Misión Crítica</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed transition-colors font-label-caps text-label-caps" href="#">Tecnología</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed transition-colors font-label-caps text-label-caps" href="#">Ecosistema</a>
+</div>
+<button class="bg-primary-container text-on-primary-fixed font-bold px-lg py-sm font-label-caps text-label-caps hover:brightness-110 transition-all rounded-none">
+                SOLICITAR ACCESO
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center justify-center overflow-hidden pt-xl">
+<div class="absolute inset-0 tech-grid opacity-20 pointer-events-none"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary-fixed/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="relative z-10 max-w-screen-2xl mx-auto px-margin-desktop text-center">
+<div class="inline-flex items-center gap-xs mb-lg bg-surface-container-high px-md py-xs border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-primary-fixed">TECNOLOGÍA DE VANGUARDIA PARA SEGURIDAD PÚBLICA</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-[64px] max-w-5xl mx-auto mb-lg leading-tight tracking-tighter">
+                No es un archivador digital de denuncias; es el <span class="text-primary-fixed">cerebro analítico</span> que detiene a las bandas.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto mb-xl">
+                Transformamos miles de partes policiales narrativos e institucionales en alertas tempranas de conexión delictual mediante Inteligencia Artificial Deep Tech.
+            </p>
+<div class="flex flex-col md:flex-row gap-lg justify-center">
+<button class="bg-primary-fixed text-on-primary-fixed font-bold text-headline-md px-xl py-md lime-glow transition-all uppercase">
+                    Ver Demo Conceptual
+                </button>
+<button class="border border-outline-variant text-on-surface font-bold text-headline-md px-xl py-md hover:bg-surface-variant/20 transition-all uppercase">
+                    Documentación Técnica
+                </button>
+</div>
+</div>
+</section>
+<!-- The Problem & 48-Hour Window -->
+<section class="py-[120px] bg-surface-container-lowest relative">
+<div class="max-w-screen-2xl mx-auto px-margin-desktop grid md:grid-cols-12 gap-xl items-center">
+<div class="md:col-span-5 flex flex-col items-start">
+<div class="relative">
+<span class="font-display-lg text-[180px] leading-none text-primary-fixed opacity-90 tracking-tighter">48</span>
+<div class="absolute -bottom-4 right-0 bg-background px-md py-xs border border-primary-fixed">
+<span class="font-label-caps text-label-caps text-primary-fixed">HORAS CRÍTICAS</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 space-y-lg">
+<h2 class="font-headline-md text-[40px] text-primary leading-tight">La brecha invisible del análisis criminal actual.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    El crimen organizado se mueve más rápido que la burocracia documental. Los sistemas actuales actúan como repositorios pasivos, enterrando patrones vitales en montañas de texto libre.
+                </p>
+<blockquote class="hairline-border bg-surface-container p-xl border-l-4 border-l-primary-fixed italic font-body-lg text-primary">
+                    "Saber que la clave está frente a tus ojos pero está oculta en la página 4.500 de un archivo que no tienes tiempo de leer."
+                </blockquote>
+<p class="font-body-md text-on-surface-variant flex items-center gap-md">
+<span class="material-symbols-outlined text-primary-fixed">warning</span>
+                    El 85% de la inteligencia táctica se pierde en el "coa" (jerga criminal) y descripciones narrativas que los buscadores tradicionales no pueden indexar.
+                </p>
+</div>
+</div>
+</section>
+<!-- Before vs After -->
+<section class="py-[120px] px-margin-desktop max-w-screen-2xl mx-auto">
+<h2 class="font-display-lg text-headline-md text-center mb-xl uppercase tracking-widest text-on-surface-variant">El Cambio Operativo</h2>
+<div class="grid md:grid-cols-2 gap-gutter">
+<!-- Past -->
+<div class="hairline-border bg-surface-container-low p-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-md font-label-caps text-label-caps text-on-surface-variant opacity-30">PARADIGMA ANTERIOR</div>
+<h3 class="font-headline-md text-headline-md mb-lg text-on-surface-variant/70">Análisis Reactivo</h3>
+<ul class="space-y-md">
+<li class="flex gap-md items-start text-on-surface-variant/60">
+<span class="material-symbols-outlined">close</span>
+<span>Lectura manual de cientos de PDFs por cada analista.</span>
+</li>
+<li class="flex gap-md items-start text-on-surface-variant/60">
+<span class="material-symbols-outlined">close</span>
+<span>Cruce de datos limitado a campos estructurados (RUT, Patente).</span>
+</li>
+<li class="flex gap-md items-start text-on-surface-variant/60">
+<span class="material-symbols-outlined">close</span>
+<span>Archivado temprano de casos por falta de conexiones evidentes.</span>
+</li>
+</ul>
+</div>
+<!-- Future -->
+<div class="hairline-border bg-surface-container p-xl border-primary-fixed/30 relative overflow-hidden ring-1 ring-primary-fixed/20 shadow-[0_0_50px_rgba(206,239,127,0.05)]">
+<div class="absolute top-0 right-0 p-md flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+<span class="font-label-caps text-label-caps text-primary-fixed">CEREBRO ANALÍTICO</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-lg text-primary">Inteligencia Proactiva</h3>
+<ul class="space-y-md">
+<li class="flex gap-md items-start text-primary">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Ingesta semántica automática de 10,000 folios por minuto.</span>
+</li>
+<li class="flex gap-md items-start text-primary">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Resolución de Entidades Conceptual: Une el apodo con el sospechoso.</span>
+</li>
+<li class="flex gap-md items-start text-primary">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Alertas de Triage: El sistema detecta el patrón antes que el humano.</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Deep Tech Core -->
+<section class="py-[120px] bg-surface-container-high overflow-hidden">
+<div class="max-w-screen-2xl mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-end mb-xl gap-lg">
+<div class="max-w-2xl">
+<span class="font-label-caps text-label-caps text-primary-fixed mb-sm block">DEEP TECH ARCHITECTURE</span>
+<h2 class="font-display-lg text-headline-md md:text-display-lg text-primary mb-md">Similitud Semántica y LLMs de Grado Militar</h2>
+<p class="text-on-surface-variant font-body-lg">Nuestra IA no busca palabras; entiende conceptos y dialectos criminales. Resolvemos la fragmentación de la información regional.</p>
+</div>
+<div class="font-data-tabular text-data-tabular bg-background p-md hairline-border border-primary-fixed/20">
+<p class="text-primary-fixed mb-xs">ENGINE_STATUS: ACTIVE</p>
+<p class="text-on-surface-variant">VECTORS_LOADED: 4,288,190</p>
+</div>
+</div>
+<div class="hairline-border bg-background overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-variant/50 border-b border-outline-variant">
+<tr>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">Nodo Origen (Arica)</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">Nodo Destino (Valparaíso)</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-primary-fixed text-right">Match Semántico</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-primary-fixed/5 transition-colors group">
+<td class="px-lg py-md font-body-md text-primary">"Sujeto con tajo en la cara"</td>
+<td class="px-lg py-md font-body-md text-primary">"Individuo con cicatriz facial"</td>
+<td class="px-lg py-md font-data-tabular text-right"><span class="bg-primary-fixed/10 text-primary-fixed px-sm py-xs">92%</span></td>
+</tr>
+<tr class="hover:bg-primary-fixed/5 transition-colors group">
+<td class="px-lg py-md font-body-md text-primary">"Huyeron en máquina gris"</td>
+<td class="px-lg py-md font-body-md text-primary">"Escaparon en sedán plateado"</td>
+<td class="px-lg py-md font-data-tabular text-right"><span class="bg-primary-fixed/10 text-primary-fixed px-sm py-xs">88%</span></td>
+</tr>
+<tr class="hover:bg-primary-fixed/5 transition-colors group">
+<td class="px-lg py-md font-body-md text-primary">"Utilizaron chicharra para el robo"</td>
+<td class="px-lg py-md font-body-md text-primary">"Uso de inhibidor de señal"</td>
+<td class="px-lg py-md font-data-tabular text-right"><span class="bg-primary-fixed/10 text-primary-fixed px-sm py-xs">95%</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-xl grid md:grid-cols-3 gap-lg">
+<div class="p-lg bg-surface-container-lowest border-l border-primary-fixed/50">
+<h4 class="font-headline-md text-body-lg text-primary mb-sm">Procesamiento de Lenguaje</h4>
+<p class="text-on-surface-variant text-body-md">Modelos entrenados en "coa" chileno y jerga delictual regional para evitar falsos negativos.</p>
+</div>
+<div class="p-lg bg-surface-container-lowest border-l border-primary-fixed/50">
+<h4 class="font-headline-md text-body-lg text-primary mb-sm">Entity Resolution</h4>
+<p class="text-on-surface-variant text-body-md">Unifica identidades dispersas (nombres, apodos, rasgos) en un solo perfil criminal unificado.</p>
+</div>
+<div class="p-lg bg-surface-container-lowest border-l border-primary-fixed/50">
+<h4 class="font-headline-md text-body-lg text-primary mb-sm">Gráfos de Vínculo</h4>
+<p class="text-on-surface-variant text-body-md">Visualización automática de redes de parentesco, logística y modus operandi entre bandas.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Ecosystem of Actors -->
+<section class="py-[120px] px-margin-desktop max-w-screen-2xl mx-auto">
+<div class="text-center mb-xl">
+<h2 class="font-display-lg text-headline-md md:text-display-lg text-primary mb-md">Ecosistema de Respuesta</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto font-body-lg">Una única fuente de verdad analítica para todas las instituciones de seguridad nacional.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-gutter">
+<!-- Analyst -->
+<div class="hairline-border p-xl bg-surface-container hover:border-primary-fixed transition-all group">
+<span class="material-symbols-outlined text-[48px] text-primary-fixed mb-lg" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<h3 class="font-headline-md text-headline-md mb-md text-primary">Analistas Criminales</h3>
+<p class="text-on-surface-variant mb-lg">PDI y Carabineros. Reducción del tiempo de triage de 3 semanas a 45 segundos. Detección automática de "bandas interregionales".</p>
+<span class="font-label-caps text-label-caps text-primary-fixed opacity-0 group-hover:opacity-100 transition-opacity">INTELIGENCIA TÁCTICA</span>
+</div>
+<!-- Prosecutors -->
+<div class="hairline-border p-xl bg-surface-container hover:border-primary-fixed transition-all group">
+<span class="material-symbols-outlined text-[48px] text-primary-fixed mb-lg" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<h3 class="font-headline-md text-headline-md mb-md text-primary">Fiscales</h3>
+<p class="text-on-surface-variant mb-lg">Ministerio Público. Evidencia técnica irrefutable basada en patrones de recurrencia y modus operandi clusterizados por IA.</p>
+<span class="font-label-caps text-label-caps text-primary-fixed opacity-0 group-hover:opacity-100 transition-opacity">PERSECUCIÓN PENAL</span>
+</div>
+<!-- Ministry -->
+<div class="hairline-border p-xl bg-surface-container hover:border-primary-fixed transition-all group">
+<span class="material-symbols-outlined text-[48px] text-primary-fixed mb-lg" style="font-variation-settings: 'FILL' 1;">policy</span>
+<h3 class="font-headline-md text-headline-md mb-md text-primary">Gobierno Central</h3>
+<p class="text-on-surface-variant mb-lg">Ministerio del Interior. Visión estratégica de hotspots delictuales y evolución del crimen organizado en tiempo real.</p>
+<span class="font-label-caps text-label-caps text-primary-fixed opacity-0 group-hover:opacity-100 transition-opacity">POLÍTICA PÚBLICA</span>
+</div>
+</div>
+</section>
+<!-- Call to Action / Final Image -->
+<section class="py-[120px] px-margin-desktop">
+<div class="max-w-screen-2xl mx-auto hairline-border bg-primary-fixed p-xl md:p-[80px] text-center text-on-primary-fixed relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-lg">Asegure la soberanía de sus datos tácticos.</h2>
+<p class="font-body-lg text-body-lg text-on-primary-fixed-variant max-w-2xl mx-auto mb-xl font-semibold">
+                    Un sistema diseñado en Chile para los desafíos críticos de seguridad nacional.
+                </p>
+<button class="bg-on-primary-fixed text-primary-fixed font-bold text-headline-md px-xl py-md hover:scale-105 transition-transform uppercase">
+                    Contactar Equipo TRL-9
+                </button>
+</div>
+<!-- Abstract network background for CTA -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<img class="w-full h-full object-cover grayscale brightness-0 invert" data-alt="A sophisticated abstract visualization of a neural network or data grid, composed of thin interconnected lines and micro-dots. The visual style is high-tech, medical-grade or intelligence-agency aesthetic, emphasizing precision, complexity, and digital architecture. The lighting is dark and moody, suggesting a subterranean server room or a high-security command center. The overarching color palette is monochromatic with sharp, clean lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOF1HSlEvlWw8cuXBBcuSaLraH9T6r00bEq1_FKhpo-6EzT2ZozBGVm-vqQajFVP9-UVVnODh6n01d0LxlGko8aF__2floW29ftPSwJ342ezDonUw19hzIINhu42v4vKgBIOpd6YGV3ou71emRZOnVAVUP39BRZvnefk5q-Wkhh6DjeoCrRzsES9vOn271g0KamhbBfwp4cFVOJwQ1bBUVfZA1wA7bCmhU4TGaZ7_3NZD7XNm5rxcPDDTXJemFliMcQH5AZfoAhdmE"/>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-xl max-w-screen-2xl mx-auto gap-lg">
+<div class="flex flex-col items-center md:items-start gap-md">
+<div class="font-headline-md text-headline-md font-bold text-primary">Cerebro Analítico</div>
+<div class="bg-surface-variant px-md py-xs border border-primary-fixed/20 flex items-center gap-sm">
+<span class="font-label-caps text-label-caps text-primary-fixed">Estado Actual: TRL 2 (Concepto Validado)</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-center md:text-left">© 2024 Cerebro Analítico. Tecnología TRL-9 para Seguridad Pública Nacional.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-lg">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Aviso Legal</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Privacidad</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Protocolos de Seguridad</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Soporte Técnico</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and lighting effects
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.querySelector('.absolute.bg-primary-fixed\\/5');
+            if(glow) {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.05;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.05;
+                glow.style.transform = `translate(calc(-50% + ${moveX}px), ${moveY}px)`;
+            }
+        });
+
+        // Simple visibility observer for scroll animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cerebro Analítico | Operational Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#cac4d5",
+                    "on-primary-fixed": "#151f00",
+                    "background": "#0a141d",
+                    "tertiary-container": "#e6e0f1",
+                    "surface-dim": "#0a141d",
+                    "inverse-primary": "#4e6700",
+                    "primary-fixed": "#ceef7f",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#322f3c",
+                    "on-surface": "#dae3f0",
+                    "surface-container-low": "#131d25",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#abb9d6",
+                    "on-primary-fixed-variant": "#3a4d00",
+                    "on-primary": "#273500",
+                    "surface-container-lowest": "#060f17",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#313a44",
+                    "surface-variant": "#2c363f",
+                    "on-secondary-fixed": "#0d1c32",
+                    "inverse-surface": "#dae3f0",
+                    "inverse-on-surface": "#28313b",
+                    "surface-container-high": "#212b34",
+                    "surface-tint": "#b3d266",
+                    "surface-container-highest": "#2c363f",
+                    "on-tertiary-fixed-variant": "#484553",
+                    "primary-fixed-dim": "#b3d266",
+                    "on-tertiary-fixed": "#1d1a26",
+                    "secondary-fixed-dim": "#b9c7e4",
+                    "tertiary": "#ffffff",
+                    "primary-container": "#ceef7f",
+                    "secondary-fixed": "#d6e3ff",
+                    "primary": "#ffffff",
+                    "secondary-container": "#3c4962",
+                    "outline-variant": "#1e293b",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#39475f",
+                    "on-primary-container": "#536d05",
+                    "outline": "#8f9380",
+                    "tertiary-fixed": "#e6e0f1",
+                    "on-background": "#dae3f0",
+                    "surface-container": "#0a192f",
+                    "on-tertiary-container": "#666271",
+                    "on-secondary": "#233148",
+                    "surface": "#0a141d",
+                    "on-surface-variant": "#c5c8b4",
+                    "secondary": "#b9c7e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "base": "4px",
+                    "xl": "40px",
+                    "margin-desktop": "48px",
+                    "sm": "8px",
+                    "margin-mobile": "16px",
+                    "lg": "24px",
+                    "gutter": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "data-tabular": ["JetBrains Mono"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "data-tabular": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #dae3f0;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            background-color: rgba(206, 239, 127, 0.1);
+            border-right: 2px solid #ceef7f;
+            color: #ffffff;
+        }
+        .tech-grid {
+            background-image: 
+                linear-gradient(to right, rgba(30, 41, 59, 0.5) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(206, 239, 127, 0.2);
+            position: absolute;
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+        .lime-glow {
+            box-shadow: 0 0 15px rgba(220, 253, 139, 0.15);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- Sidebar Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface flex flex-col py-lg px-md z-50" id="sidebar">
+<div class="mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Cerebro Analítico</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-xs">Operational Intelligence</p>
+</div>
+<nav class="flex-1 space-y-sm">
+<button class="nav-item w-full flex items-center gap-md p-md transition-colors duration-200 hover:bg-surface-container-high active:scale-95 transition-transform active-tab" data-tab="semantic" onclick="switchTab('semantic')">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md">Ingesta Semántica</span>
+</button>
+<button class="nav-item w-full flex items-center gap-md p-md transition-colors duration-200 hover:bg-surface-container-high active:scale-95 transition-transform text-on-surface-variant" data-tab="triage" onclick="switchTab('triage')">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-body-md">Triage y Alertas</span>
+</button>
+<button class="nav-item w-full flex items-center gap-md p-md transition-colors duration-200 hover:bg-surface-container-high active:scale-95 transition-transform text-on-surface-variant" data-tab="evidence" onclick="switchTab('evidence')">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-body-md">Carpeta de Evidencia</span>
+</button>
+</nav>
+<div class="mt-auto space-y-md border-t border-outline-variant pt-lg">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-[#dcfd8b] animate-pulse"></div>
+<span class="font-label-caps text-[10px] text-primary">Estado del Sistema: Activo</span>
+</div>
+<div class="flex flex-col gap-sm">
+<button class="flex items-center gap-md p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-sm">Configuración</span>
+</button>
+<button class="flex items-center gap-md p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-sm">Soporte</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant bg-surface-container/80 backdrop-blur-md flex justify-between items-center px-margin-desktop z-40">
+<h2 class="font-label-caps text-label-caps text-primary uppercase tracking-widest" id="view-title">Panel de Control</h2>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex gap-md">
+<span class="font-label-caps text-primary border-b-2 border-primary pb-1 cursor-pointer">Panel de Control</span>
+<span class="font-label-caps text-on-surface-variant hover:text-primary cursor-pointer transition-all">Logs del Sistema</span>
+<span class="font-label-caps text-on-surface-variant hover:text-primary cursor-pointer transition-all">Estado de Red</span>
+</div>
+<div class="flex items-center gap-md ml-lg">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">notifications</span>
+<div class="flex items-center gap-sm cursor-pointer group">
+<img alt="Administrator" class="w-8 h-8 object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="A professional headshot of a senior intelligence administrator in a high-contrast cinematic lighting setup. The aesthetic is clean and corporate, featuring sharp focus on the facial features with a dark, blurred tech-office background. Muted colors with a slight emphasis on dark blues to match the UI style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl4oYXI5LCBkINEV3-JAPIgGmme62NXozpVCIoeqoZ39Kg6dBPlZ2w1jOc542zOyx_1UmjruModrYN3BLMNWi8E3Buq0muaVFB1rcORJtBCZGL5ZCfCS7B_Be-3NMKsUDNTszSIHdFc8CajohTVn5gu86HxK5YpixYHDfx2YJ_xNQTY8ZgCZKLU_912hQv7lnLGojiIBel49MM0GhUTrEA5Xe8YueH9_vvqOY6wmkjGCsfFCePIJTlmSrQW6_N0y7S2ig4LUyGzAPS"/>
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen relative tech-grid">
+<!-- Tab 1: Semantic Ingestion -->
+<section class="tab-content p-xl animate-in fade-in duration-500" id="view-semantic">
+<header class="mb-xl">
+<h3 class="font-display-lg text-primary mb-xs">Ingesta e Inteligencia Semántica en Tiempo Real</h3>
+<p class="text-on-surface-variant font-body-md mb-md">Procesando relatos narrativos no estructurados e informales (Carabineros / PDI).</p>
+<div class="h-1 w-24 bg-[#dcfd8b]"></div>
+</header>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left: Recent Reports -->
+<div class="col-span-12 lg:col-span-5 bg-surface-container border border-outline-variant p-lg relative overflow-hidden">
+<div class="scanline"></div>
+<div class="flex justify-between items-center mb-lg border-b border-outline-variant pb-md">
+<span class="font-label-caps text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">list_alt</span>
+                            Flujo de Denuncias Recientes
+                        </span>
+<span class="font-data-tabular text-[10px] text-on-surface-variant">REC: 124.8kbps</span>
+</div>
+<div class="space-y-md font-data-tabular text-sm">
+<div class="p-md bg-background border-l-2 border-primary/40 group hover:border-primary transition-all">
+<span class="text-[10px] text-[#dcfd8b] block mb-xs">ORIGEN: LLAMADA_09:12</span>
+<p class="text-on-surface leading-relaxed">"...sujeto de contextura gruesa, con tajo visible en la mejilla, huye en máquina gris por la ruta 5..."</p>
+</div>
+<div class="p-md bg-background border-l-2 border-outline-variant opacity-60">
+<span class="text-[10px] text-on-surface-variant block mb-xs">ORIGEN: TEXTO_09:08</span>
+<p class="text-on-surface leading-relaxed">"Sospechoso identificado en sector norte. Portaba vestimenta oscura tipo parka y gorro lana."</p>
+</div>
+<div class="p-md bg-background border-l-2 border-outline-variant opacity-40">
+<span class="text-[10px] text-on-surface-variant block mb-xs">ORIGEN: RADIO_08:55</span>
+<p class="text-on-surface leading-relaxed">"Reportan vehículo abandonado con impactos. Se requiere peritaje balístico inmediato."</p>
+</div>
+</div>
+</div>
+<!-- Right: Deep Tech Analysis -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container border border-outline-variant p-lg">
+<div class="flex justify-between items-center mb-lg">
+<span class="font-label-caps text-primary">Análisis Cognitivo Deep Tech</span>
+<span class="px-md py-xs bg-primary/10 text-primary font-label-caps text-[10px]">MOTOR VECTORIAL v.4.2</span>
+</div>
+<div class="aspect-video bg-black/50 border border-outline-variant relative flex items-center justify-center mb-lg overflow-hidden">
+<!-- Abstract Network Pattern -->
+<div class="absolute inset-0 opacity-20" id="network-bg"></div>
+<div class="z-10 text-center">
+<div class="inline-block p-xl border-2 border-[#dcfd8b] lime-glow bg-surface-container/80 backdrop-blur-md">
+<span class="material-symbols-outlined text-4xl text-[#dcfd8b] mb-md animate-spin-slow">psychology</span>
+<p class="font-label-caps text-sm text-[#dcfd8b] mb-xs">Procesando Capas Neuronales...</p>
+<div class="flex gap-1 justify-center">
+<div class="w-1 h-1 bg-[#dcfd8b] animate-bounce"></div>
+<div class="w-1 h-1 bg-[#dcfd8b] animate-bounce delay-100"></div>
+<div class="w-1 h-1 bg-[#dcfd8b] animate-bounce delay-200"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex items-start gap-md font-data-tabular text-sm">
+<span class="text-primary material-symbols-outlined">check_circle</span>
+<p class="text-on-surface-variant">Vectorizando texto libre en espacios latentes de alta dimensión...</p>
+</div>
+<div class="flex items-start gap-md font-data-tabular text-sm">
+<span class="text-primary material-symbols-outlined">data_object</span>
+<p class="text-on-surface-variant">Analizando variaciones lingüísticas y jerga informal ('coa')...</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tab 2: Triage & Alerts -->
+<section class="tab-content hidden p-xl animate-in slide-in-from-bottom-4 duration-500" id="view-triage">
+<header class="mb-xl">
+<h3 class="font-display-lg text-primary mb-xs">Centro de Triage Operativo</h3>
+<div class="h-1 w-24 bg-[#dcfd8b]"></div>
+</header>
+<div class="max-w-5xl mx-auto space-y-xl">
+<!-- Massive Alert Card -->
+<div class="bg-surface-container border-2 border-[#dcfd8b] lime-glow p-xl relative">
+<div class="absolute top-0 right-0 p-lg">
+<div class="flex items-center gap-sm px-md py-sm bg-error-container text-on-error-container font-label-caps text-xs">
+<span class="material-symbols-outlined text-sm">timer</span>
+                            Ventana de Acción: 18 Horas Restantes (Flagrancia)
+                        </div>
+</div>
+<h4 class="font-headline-md text-[#dcfd8b] mb-xl flex items-center gap-md">
+<span class="material-symbols-outlined text-4xl">warning</span>
+                        ¡ALERTA DE CONEXIÓN CRÍTICA: BANDA ITINERANTE DETECTADA!
+                    </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-xl">
+<div class="p-lg bg-background border border-outline-variant">
+<span class="font-label-caps text-on-surface-variant text-[10px] block mb-sm">CASO A: ARICA (2024-05-12)</span>
+<p class="font-data-tabular text-sm leading-relaxed text-on-surface">"Uso de inhibidores de señal en sector portuario. Vehículo SUV gris con patente clonada. Modus operandi: saturación de frecuencias."</p>
+</div>
+<div class="p-lg bg-background border border-outline-variant">
+<span class="font-label-caps text-on-surface-variant text-[10px] block mb-sm">CASO B: VALPARAÍSO (HOY)</span>
+<p class="font-data-tabular text-sm leading-relaxed text-on-surface">"Robo frustrado a camión de carga. Sujetos utilizaron dispositivos electrónicos para anular alarmas. Camioneta similar a SUV gris identificada."</p>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-lg items-center border-t border-outline-variant pt-xl">
+<div class="flex-1 w-full">
+<div class="flex justify-between mb-sm font-label-caps text-xs">
+<span class="text-primary">92% Match Semántico Autónomo</span>
+<span class="text-[#dcfd8b]">ALTO RIESGO</span>
+</div>
+<div class="h-4 bg-background border border-outline-variant p-[2px]">
+<div class="h-full bg-[#dcfd8b] shadow-[0_0_10px_#dcfd8b]" style="width: 92%"></div>
+</div>
+</div>
+<div class="w-full md:w-64">
+<button class="w-full bg-[#dcfd8b] text-black font-label-caps py-md hover:bg-[#c9f060] transition-colors font-bold">DESPLEGAR EQUIPO</button>
+</div>
+</div>
+</div>
+<!-- Map Widget -->
+<div class="bg-surface-container border border-outline-variant p-lg">
+<span class="font-label-caps text-primary mb-md block">Corredor Logístico de Banda Criminal</span>
+<div class="h-80 bg-background border border-outline-variant relative overflow-hidden flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover grayscale opacity-40" data-alt="A stylized satellite map view of the Chilean coastline connecting Arica and Valparaiso. The map is overlaid with digital data markers, glowing routes in lime green, and tactical telemetry data. The color palette is strictly dark blues, blacks, and vibrant lime green accents to signify intelligence tracking." data-location="Chile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGoxByNz_6ZJgTczVOtGA0iiT8HgqU7ul2faOsIsFllHhm8SJANZfcXYQnqA7nPVRUYhsh0UzQDarpM2EzWdrjpJ3dDl5cJ9l_C3zdr68G7CA7fGYOy2VfhMFfQ-_O_b7BdKU71Xid6GHY6D39eaUr_qaBc_erB7a_uQRdt2OlZTIU74jedTbkathcdvm6mruT8TjeYKLtCuzoZ1ZE3eLE736hya-xsWUA7Hj3Nw1m7chYMG_HYwq62di0O7vId2WFTG8ZbfPl42h8"/>
+<div class="z-10 w-full px-xl flex justify-between items-center">
+<div class="text-center p-md bg-black/80 border border-[#dcfd8b]">
+<p class="font-label-caps text-[10px] text-[#dcfd8b]">ORIGEN</p>
+<p class="font-headline-md font-bold text-primary">ARICA</p>
+</div>
+<div class="flex-1 h-[2px] bg-gradient-to-right from-[#dcfd8b] to-transparent relative">
+<div class="absolute -top-1 left-0 w-2 h-2 bg-[#dcfd8b] animate-ping"></div>
+</div>
+<div class="text-center p-md bg-black/80 border border-[#dcfd8b]">
+<p class="font-label-caps text-[10px] text-[#dcfd8b]">DETECCIÓN</p>
+<p class="font-headline-md font-bold text-primary">VALPO</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tab 3: Evidence Folder -->
+<section class="tab-content hidden p-xl animate-in fade-in duration-500" id="view-evidence">
+<header class="mb-xl">
+<h3 class="font-display-lg text-primary mb-xs">Consolidación de Evidencia Accionable</h3>
+<div class="h-1 w-24 bg-[#dcfd8b]"></div>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="col-span-2 space-y-lg">
+<!-- Evidence Document -->
+<div class="bg-surface-container border border-outline-variant p-xl font-body-md text-on-surface relative">
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-primary-container opacity-20 text-6xl">verified_user</span>
+</div>
+<div class="mb-xl flex gap-lg">
+<span class="material-symbols-outlined text-4xl text-[#dcfd8b]">description</span>
+<div>
+<p class="font-label-caps text-xs text-on-surface-variant mb-xs">ID REPORTE: AR-9912-X</p>
+<h4 class="font-headline-md font-bold text-primary">Unificación de Causas Penales</h4>
+</div>
+</div>
+<p class="mb-lg border-l-4 border-primary pl-lg py-md bg-primary/5 italic">
+                            "Se identificaron 4 causas penales previamente aisladas bajo el algoritmo de vinculación por comportamiento táctico. Los patrones de huida y los objetivos económicos sugieren una sola unidad operativa."
+                        </p>
+<div class="space-y-md border-t border-outline-variant pt-lg">
+<div class="flex justify-between items-center group">
+<span class="font-body-md">Probabilidad de Condena (Agregada)</span>
+<span class="font-data-tabular text-xl text-[#dcfd8b]">84.2%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md">Sujetos Identificados por Reconocimiento Facial</span>
+<span class="font-data-tabular text-xl text-[#dcfd8b]">3</span>
+</div>
+</div>
+</div>
+<!-- Status Comparison -->
+<div class="grid grid-cols-2 gap-lg">
+<div class="p-lg bg-surface-container border border-outline-variant opacity-40">
+<span class="font-label-caps text-[10px] block mb-sm">ESTADO PREVIO</span>
+<p class="line-through text-error font-headline-md font-bold">Riesgo de Archivo Temprano</p>
+</div>
+<div class="p-lg bg-surface-container border border-[#dcfd8b]">
+<span class="font-label-caps text-[10px] block mb-sm text-[#dcfd8b]">ESTADO ACTUAL</span>
+<p class="text-primary font-headline-md font-bold">Evidencia Lista para Persecución Penal</p>
+</div>
+</div>
+</div>
+<!-- Export Sidebar -->
+<div class="space-y-lg">
+<div class="bg-surface-container border border-outline-variant p-lg">
+<span class="font-label-caps text-primary mb-md block">Archivos Adjuntos</span>
+<div class="space-y-sm">
+<div class="flex items-center gap-md p-sm hover:bg-background border border-transparent hover:border-outline-variant cursor-pointer transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">attachment</span>
+<span class="text-sm font-data-tabular">video_patio_carga.mp4</span>
+</div>
+<div class="flex items-center gap-md p-sm hover:bg-background border border-transparent hover:border-outline-variant cursor-pointer transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">attachment</span>
+<span class="text-sm font-data-tabular">peritaje_balistico_01.pdf</span>
+</div>
+<div class="flex items-center gap-md p-sm hover:bg-background border border-transparent hover:border-outline-variant cursor-pointer transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">attachment</span>
+<span class="text-sm font-data-tabular">ident_reconocimiento.zip</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-[#dcfd8b] text-black font-headline-md py-lg flex flex-col items-center justify-center gap-sm group hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined text-3xl group-hover:animate-bounce">cloud_upload</span>
+<span class="font-bold">Exportar Carpeta Unificada a Fiscalía</span>
+<span class="font-label-caps text-[10px] opacity-60">Firma Digital Criptográfica Incluida</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<script>
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Show selected tab
+            document.getElementById('view-' + tabId).classList.remove('hidden');
+            
+            // Update sidebar styles
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active-tab', 'text-primary');
+                item.classList.add('text-on-surface-variant');
+            });
+            
+            const activeNav = document.querySelector(`[data-tab="${tabId}"]`);
+            activeNav.classList.add('active-tab', 'text-primary');
+            activeNav.classList.remove('text-on-surface-variant');
+
+            // Update Header title (Spanish translations)
+            const titles = {
+                'semantic': 'Módulo de Ingesta Semántica',
+                'triage': 'Motor de Triage y Alertas',
+                'evidence': 'Consolidación de Evidencia'
+            };
+            document.getElementById('view-title').textContent = titles[tabId];
+        }
+
+        // Initialize background pattern
+        const networkBg = document.getElementById('network-bg');
+        if (networkBg) {
+            for (let i = 0; i < 30; i++) {
+                const line = document.createElement('div');
+                line.className = 'absolute bg-[#dcfd8b]/20 h-[0.5px]';
+                line.style.width = Math.random() * 100 + '%';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.left = Math.random() * 100 + '%';
+                line.style.transform = `rotate(${Math.random() * 360}deg)`;
+                networkBg.appendChild(line);
+
+                const node = document.createElement('div');
+                node.className = 'absolute bg-[#dcfd8b] w-1 h-1';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.left = Math.random() * 100 + '%';
+                networkBg.appendChild(node);
+            }
+        }
+    </script>
+</body></html>
