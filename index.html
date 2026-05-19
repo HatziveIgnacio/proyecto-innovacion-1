@@ -101,6 +101,17 @@
                 box-shadow: 0 0 0 0 rgba(220, 253, 139, 0);
             }
         }
+
+        .animate-dash {
+            stroke-dasharray: 20, 15;
+            animation: dash-animation 25s linear infinite;
+        }
+
+        @keyframes dash-animation {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
     </style>
 </head>
 
@@ -374,7 +385,7 @@
 
             <!-- ==================== DIAPOSITIVA 4 ==================== -->
             <section id="slide-4"
-                class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
+                class="slide-container slide-hidden bg-black flex flex-col justify-center p-8 border border-outline-variant">
 
                 <!-- Context Header -->
                 <div
@@ -394,47 +405,87 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-stretch">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                     <!-- Left: Active Corridor Satellite map -->
-                    <div
-                        class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between min-h-[260px] relative">
+                    <div class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-4 flex flex-col relative">
                         <div class="flex justify-between items-center mb-3 border-b border-outline-variant pb-2">
                             <span class="font-mono text-xs text-primary font-bold">CORREDOR DELICTUAL DETECTADO (MAPA
                                 TÁCTICO)</span>
                             <span class="font-mono text-[10px] text-red-400">BANDA ITINERANTE</span>
                         </div>
 
-                        <!-- 400x200 Aspect Ratio box: perfectly guarantees NO vertical or horizontal cuts -->
-                        <div
-                            class="flex-1 bg-black border border-outline-variant relative overflow-hidden flex items-center justify-center min-h-[160px] p-2">
-                            <div class="absolute inset-0 bg-[#060f17] tech-grid opacity-30"></div>
+                        <!-- Map container with native aspect ratio of the image -->
+                        <div class="w-full relative overflow-hidden border border-outline-variant max-h-[55vh]"
+                            style="aspect-ratio: 2496/1696;">
+                            <!-- The landscape map of Chile -->
+                            <img src="mapaNuevo.png" alt="Mapa Táctico de Chile"
+                                class="absolute inset-0 w-full h-full object-fill opacity-85 select-none pointer-events-none" />
 
-                            <!-- Wide-layout SVG perfectly centered inside card, map nodes have massive safe boundaries -->
-                            <svg class="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet">
-                                <!-- Draw central chile schematic lines diagonally to maximize card height usage safely -->
-                                <path d="M75,20 L80,40 L110,80 L140,120 L180,160 L195,180" fill="none" stroke="#2c363f"
-                                    stroke-width="3" />
+                            <!-- Tactical SVG Overlay - viewBox matches image pixel dimensions exactly -->
+                            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 2496 1696"
+                                preserveAspectRatio="none">
+                                <!-- Neon path glow (behind the dashed line) -->
+                                <path d="M 1310,200 L 1350,380 L 1300,580 L 1280,830 L 1240,1060 L 1200,1440"
+                                    fill="none" stroke="rgba(220, 253, 139, 0.2)" stroke-width="14"
+                                    stroke-linecap="round" stroke-linejoin="round" />
 
-                                <!-- Arica Node -->
-                                <circle cx="80" cy="40" r="5" fill="#dcfd8b" class="animate-ping" />
-                                <circle cx="80" cy="40" r="4" fill="#dcfd8b" />
-                                <text x="90" y="44" fill="#dcfd8b" font-family="JetBrains Mono" font-size="9"
-                                    font-weight="bold">ARICA (Caso A)</text>
+                                <!-- Animated tactical dashed line -->
+                                <path d="M 1310,200 L 1350,380 L 1300,580 L 1280,830 L 1240,1060 L 1200,1440"
+                                    fill="none" stroke="#dcfd8b" stroke-width="4" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-dasharray="14,10" class="animate-dash" />
 
-                                <!-- Tactical link dashed line -->
-                                <path d="M80,40 Q130,80 180,160" fill="none" stroke="#dcfd8b" stroke-width="1.5"
-                                    stroke-dasharray="4,4" />
+                                <!-- 1. Arica -->
+                                <g transform="translate(1310, 200)">
+                                    <circle r="16" fill="#dcfd8b" class="animate-ping" opacity="0.3" />
+                                    <circle r="6" fill="#dcfd8b" />
+                                    <text x="22" y="5" fill="#dcfd8b" font-family="JetBrains Mono" font-size="24"
+                                        font-weight="bold"></text>
+                                </g>
 
-                                <!-- Valpo Node -->
-                                <circle cx="180" cy="160" r="5" fill="#ef4444" class="animate-ping" />
-                                <circle cx="180" cy="160" r="4" fill="#ef4444" />
-                                <text x="190" y="164" fill="#ef4444" font-family="JetBrains Mono" font-size="9"
-                                    font-weight="bold">VALPARAÍSO (Hoy)</text>
+                                <!-- 2. Iquique -->
+                                <g transform="translate(1350, 380)">
+                                    <circle r="14" fill="#dcfd8b" class="animate-ping" opacity="0.3" />
+                                    <circle r="5" fill="#dcfd8b" />
+                                    <text x="22" y="5" fill="#dcfd8b" font-family="JetBrains Mono" font-size="24"
+                                        font-weight="bold"></text>
+                                </g>
+
+                                <!-- 3. Antofagasta -->
+                                <g transform="translate(1300, 580)">
+                                    <circle r="14" fill="#dcfd8b" class="animate-ping" opacity="0.3" />
+                                    <circle r="5" fill="#dcfd8b" />
+                                    <text x="22" y="5" fill="#dcfd8b" font-family="JetBrains Mono" font-size="24"
+                                        font-weight="bold"></text>
+                                </g>
+
+                                <!-- 4. Copiapó -->
+                                <g transform="translate(1280, 830)">
+                                    <circle r="14" fill="#dcfd8b" class="animate-ping" opacity="0.3" />
+                                    <circle r="5" fill="#dcfd8b" />
+                                    <text x="22" y="5" fill="#dcfd8b" font-family="JetBrains Mono" font-size="24"
+                                        font-weight="bold"></text>
+                                </g>
+
+                                <!-- 5. La Serena -->
+                                <g transform="translate(1240, 1060)">
+                                    <circle r="14" fill="#dcfd8b" class="animate-ping" opacity="0.3" />
+                                    <circle r="5" fill="#dcfd8b" />
+                                    <text x="22" y="5" fill="#dcfd8b" font-family="JetBrains Mono" font-size="24"
+                                        font-weight="bold"></text>
+                                </g>
+
+                                <!-- 6. Valparaíso (nodo crítico rojo) -->
+                                <g transform="translate(1200, 1440)">
+                                    <circle r="22" fill="#ef4444" class="animate-ping" opacity="0.4" />
+                                    <circle r="8" fill="#ef4444" />
+                                    <text x="28" y="7" fill="#ef4444" font-family="JetBrains Mono" font-size="26"
+                                        font-weight="bold"></text>
+                                </g>
                             </svg>
 
-                            <!-- High fidelity responsive absolute overlay telemetry block placed cleanly on the right -->
+                            <!-- Telemetry overlay -->
                             <div
-                                class="absolute right-4 bottom-4 bg-[#0a192f]/90 border border-outline-variant p-3 font-mono text-[10px] w-[145px] shadow-[0_0_15px_rgba(0,0,0,0.6)]">
+                                class="absolute right-3 bottom-3 bg-[#0a192f]/95 border border-outline-variant p-3 font-mono text-[10px] w-[140px] shadow-[0_0_15px_rgba(0,0,0,0.6)]">
                                 <span class="text-primary-fixed block font-bold mb-1 tracking-wider">TELEMETRÍA:</span>
                                 <div class="space-y-1 text-slate-300 text-[9px]">
                                     <div>Distancia: 1,600 Km</div>
