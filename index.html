@@ -6,7 +6,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Cerebro Analítico | Pitch Interactivo de 3 Minutos</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -35,7 +37,7 @@
         }
 
         .tech-grid {
-            background-image: 
+            background-image:
                 linear-gradient(to right, rgba(30, 41, 59, 0.4) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(30, 41, 59, 0.4) 1px, transparent 1px);
             background-size: 32px 32px;
@@ -73,8 +75,13 @@
         }
 
         @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
         }
 
         .pulse-lime {
@@ -82,9 +89,17 @@
         }
 
         @keyframes pulse-border {
-            0% { box-shadow: 0 0 0 0 rgba(220, 253, 139, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(220, 253, 139, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 253, 139, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(220, 253, 139, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(220, 253, 139, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(220, 253, 139, 0);
+            }
         }
     </style>
 </head>
@@ -96,23 +111,27 @@
         <div class="flex justify-between items-center w-full px-6 md:px-12 py-4 max-w-screen-2xl mx-auto">
             <div class="flex items-center gap-3">
                 <span class="w-3 h-3 bg-primary-fixed rounded-none animate-pulse"></span>
-                <span class="font-bold text-lg md:text-xl text-primary tracking-tight font-mono">Cerebro Analítico</span>
+                <span class="font-bold text-lg md:text-xl text-primary tracking-tight font-mono">Cerebro
+                    Analítico</span>
             </div>
-            
+
             <div class="hidden lg:flex items-center gap-6">
                 <div class="bg-[#0a192f] border border-outline-variant px-4 py-2 flex items-center gap-3">
-                    <span class="font-mono text-xs text-primary-fixed font-bold tracking-wider">PITCH DE 3 MINUTOS</span>
+                    <span class="font-mono text-xs text-primary-fixed font-bold tracking-wider">PITCH DE 3
+                        MINUTOS</span>
                     <div class="h-4 w-[1px] bg-outline-variant"></div>
                     <span id="global-timer" class="font-mono text-sm text-primary font-bold">00:00 / 03:00</span>
                 </div>
             </div>
 
             <div class="flex items-center gap-3">
-                <button id="toggle-autoplay" class="bg-primary-fixed text-black font-mono text-xs font-bold px-4 py-2 hover:brightness-110 transition-all flex items-center gap-2">
+                <button id="toggle-autoplay"
+                    class="bg-primary-fixed text-black font-mono text-xs font-bold px-4 py-2 hover:brightness-110 transition-all flex items-center gap-2">
                     <span class="material-symbols-outlined text-sm" id="autoplay-icon">play_arrow</span>
                     <span id="autoplay-text">INICIAR PITCH</span>
                 </button>
-                <button id="reset-pitch" class="border border-outline-variant text-on-surface font-mono text-xs px-3 py-2 hover:bg-surface-variant/20 transition-all flex items-center">
+                <button id="reset-pitch"
+                    class="border border-outline-variant text-on-surface font-mono text-xs px-3 py-2 hover:bg-surface-variant/20 transition-all flex items-center">
                     <span class="material-symbols-outlined text-sm">replay</span>
                 </button>
             </div>
@@ -121,16 +140,19 @@
 
     <!-- Main Pitch Container -->
     <main class="flex-1 w-full max-w-screen-2xl mx-auto px-6 md:px-12 py-6 flex items-center justify-center relative">
-        
+
         <!-- Toast Status Alert -->
-        <div id="toast-paused" class="absolute top-4 bg-[#0a192f] text-primary border border-primary-fixed px-4 py-2 z-50 font-mono text-xs transition-opacity duration-300 opacity-0 pointer-events-none flex items-center gap-3">
+        <div id="toast-paused"
+            class="absolute top-4 bg-[#0a192f] text-primary border border-primary-fixed px-4 py-2 z-50 font-mono text-xs transition-opacity duration-300 opacity-0 pointer-events-none flex items-center gap-3">
             <span class="w-2 h-2 rounded-full bg-primary-fixed animate-ping"></span>
             <span>Pitch en pausa. Haz clic en "Reanudar" para continuar la guía.</span>
         </div>
 
         <!-- Floating Suggested Next Slide Button -->
-        <div id="next-suggestion-btn" class="absolute bottom-10 right-10 z-50 transition-all duration-500 opacity-0 scale-95 pointer-events-none">
-            <button onclick="advanceSuggestedSlide()" class="bg-[#0a192f] border-2 border-primary-fixed text-primary-fixed hover:bg-primary-fixed hover:text-black font-mono text-xs font-bold px-5 py-3.5 flex items-center gap-2 pulse-lime shadow-[0_0_20px_rgba(220,253,139,0.3)] transition-all">
+        <div id="next-suggestion-btn"
+            class="absolute bottom-10 right-10 z-50 transition-all duration-500 opacity-0 scale-95 pointer-events-none">
+            <button onclick="advanceSuggestedSlide()"
+                class="bg-[#0a192f] border-2 border-primary-fixed text-primary-fixed hover:bg-primary-fixed hover:text-black font-mono text-xs font-bold px-5 py-3.5 flex items-center gap-2 pulse-lime shadow-[0_0_20px_rgba(220,253,139,0.3)] transition-all">
                 <span>[TIEMPO SUGERIDO ALCANZADO: AVANZAR]</span>
                 <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
@@ -140,51 +162,63 @@
         <div class="w-full min-h-[660px] md:min-h-[580px] relative">
 
             <!-- ==================== DIAPOSITIVA 1 ==================== -->
-            <section id="slide-1" class="slide-container slide-active bg-black tech-grid flex flex-col justify-center items-center text-center p-8 border border-outline-variant">
+            <section id="slide-1"
+                class="slide-container slide-active bg-black tech-grid flex flex-col justify-center items-center text-center p-8 border border-outline-variant">
                 <div class="absolute inset-0 bg-primary-fixed/5 blur-[120px] rounded-full pointer-events-none"></div>
-                
+
                 <div class="inline-flex items-center gap-2 mb-6 bg-[#0a192f] px-4 py-2 border border-primary-fixed/30">
                     <span class="w-2.5 h-2.5 bg-primary-fixed animate-pulse"></span>
-                    <span class="font-mono text-xs text-primary-fixed tracking-widest font-bold">SISTEMA DE INTELIGENCIA DE MISIÓN CRÍTICA</span>
+                    <span class="font-mono text-xs text-primary-fixed tracking-widest font-bold">SISTEMA DE INTELIGENCIA
+                        DE MISIÓN CRÍTICA</span>
                 </div>
 
-                <h1 class="text-3xl md:text-5xl lg:text-6xl max-w-5xl mx-auto mb-6 leading-tight tracking-tighter uppercase font-extrabold text-primary">
+                <h1
+                    class="text-3xl md:text-5xl lg:text-6xl max-w-5xl mx-auto mb-6 leading-tight tracking-tighter uppercase font-extrabold text-primary">
                     CEREBRO ANALÍTICO
                 </h1>
-                <p class="text-lg md:text-xl text-primary-fixed max-w-3xl mx-auto mb-6 font-bold uppercase tracking-wider">
+                <p
+                    class="text-lg md:text-xl text-primary-fixed max-w-3xl mx-auto mb-6 font-bold uppercase tracking-wider">
                     Sistema Deep Tech de Triage e Inteligencia Criminal
                 </p>
 
-                <blockquote class="italic text-on-surface-variant text-base md:text-lg max-w-4xl mx-auto p-6 bg-surface-container/50 border-l-4 border-primary-fixed/50 border border-outline-variant mb-8">
+                <blockquote
+                    class="italic text-on-surface-variant text-base md:text-lg max-w-4xl mx-auto p-6 bg-surface-container/50 border-l-4 border-primary-fixed/50 border border-outline-variant mb-8">
                     "No es un archivador digital de denuncias; es el cerebro analítico que detiene a las bandas."
                 </blockquote>
 
-                <div class="font-mono text-xs text-slate-400 mb-8 space-y-1 bg-black/60 p-4 border border-outline-variant">
+                <div
+                    class="font-mono text-xs text-slate-400 mb-8 space-y-1 bg-black/60 p-4 border border-outline-variant">
                     <div>[SYSTEM STATUS: ONLINE] [TRL 2 READY]</div>
                     <div class="text-[#ceef7f]/70">[INTELLIGENCE VECTOR CORE ACTIVATED]</div>
                 </div>
 
-                <button onclick="startPitchAutoplay()" class="bg-primary-fixed text-black font-mono text-xs font-bold px-6 py-3 hover:scale-105 transition-all flex items-center gap-2 pulse-lime">
+                <button onclick="startPitchAutoplay()"
+                    class="bg-primary-fixed text-black font-mono text-xs font-bold px-6 py-3 hover:scale-105 transition-all flex items-center gap-2 pulse-lime">
                     <span class="material-symbols-outlined text-sm">rocket_launch</span>
                     <span>INICIAR PRESENTACIÓN DE 3 MINUTOS</span>
                 </button>
             </section>
 
             <!-- ==================== DIAPOSITIVA 2 ==================== -->
-            <section id="slide-2" class="slide-container slide-hidden bg-black flex flex-col justify-center p-8 border border-outline-variant">
+            <section id="slide-2"
+                class="slide-container slide-hidden bg-black flex flex-col justify-center p-8 border border-outline-variant">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
                     <!-- Digital Timer Left Column -->
-                    <div class="lg:col-span-5 flex flex-col items-center justify-center p-6 bg-[#0a192f] border-2 border-red-500/30 relative">
+                    <div
+                        class="lg:col-span-5 flex flex-col items-center justify-center p-6 bg-[#0a192f] border-2 border-red-500/30 relative">
                         <div class="scanline"></div>
-                        <div class="font-mono text-xs text-red-500 font-bold mb-4 tracking-widest flex items-center gap-2">
+                        <div
+                            class="font-mono text-xs text-red-500 font-bold mb-4 tracking-widest flex items-center gap-2">
                             <span class="material-symbols-outlined text-sm animate-pulse">warning</span>
                             VENTANA CRÍTICA DE ACCIÓN
                         </div>
-                        <div id="countdown-clock" class="font-mono text-[48px] md:text-[64px] lg:text-[76px] leading-none text-red-500 font-bold tracking-widest filter drop-shadow-[0_0_15px_rgba(239,68,68,0.4)]">
+                        <div id="countdown-clock"
+                            class="font-mono text-[48px] md:text-[64px] lg:text-[76px] leading-none text-red-500 font-bold tracking-widest filter drop-shadow-[0_0_15px_rgba(239,68,68,0.4)]">
                             48:00:00
                         </div>
-                        <div class="font-mono text-[10px] text-on-surface-variant mt-2 uppercase">HORAS HASTA LA DISPERSIÓN DE LA BANDA</div>
-                        
+                        <div class="font-mono text-[10px] text-on-surface-variant mt-2 uppercase">HORAS HASTA LA
+                            DISPERSIÓN DE LA BANDA</div>
+
                         <div class="mt-6 w-full bg-black/80 border border-outline-variant p-4">
                             <div class="flex justify-between items-center text-xs font-mono">
                                 <span class="text-red-500">UMBRAL DE FLAGRANCIA</span>
@@ -198,49 +232,62 @@
 
                     <!-- Pain Text Right Column -->
                     <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
-                        <div class="inline-block bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 font-mono text-xs w-fit">
+                        <div
+                            class="inline-block bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 font-mono text-xs w-fit">
                             EL DOLOR OPERATIVO
                         </div>
                         <h2 class="text-2xl md:text-3xl text-primary leading-tight font-extrabold uppercase">
                             La ventana de impunidad: El tiempo juega a favor del crimen
                         </h2>
-                        
+
                         <div class="space-y-4">
                             <div class="flex gap-4 items-start p-4 bg-[#0a192f] border-l-4 border-red-500">
                                 <span class="material-symbols-outlined text-red-500 mt-0.5">gavel</span>
                                 <p class="text-sm md:text-base text-on-surface leading-relaxed">
-                                    <strong class="text-red-400">48 horas críticas:</strong> El plazo que los analistas tienen para conectar patrones antes de que las bandas itinerantes se desplacen a otras macrozonas.
+                                    <strong class="text-red-400">48 horas críticas:</strong> El plazo que los analistas
+                                    tienen para conectar patrones antes de que las bandas itinerantes se desplacen a
+                                    otras macrozonas.
                                 </p>
                             </div>
 
                             <div class="flex gap-4 items-start p-4 bg-[#0a192f] border-l-4 border-red-500">
                                 <span class="material-symbols-outlined text-red-500 mt-0.5">data_loss_prevention</span>
                                 <p class="text-sm md:text-base text-on-surface leading-relaxed">
-                                    <strong class="text-red-400">El cuello de botella:</strong> Miles de denuncias escritas a mano o registradas en textos libres aislados. Es imposible cruzar o estructurar esta información manualmente a tiempo.
+                                    <strong class="text-red-400">El cuello de botella:</strong> Miles de denuncias
+                                    escritas a mano o registradas en textos libres aislados. Es imposible cruzar o
+                                    estructurar esta información manualmente a tiempo.
                                 </p>
                             </div>
                         </div>
 
-                        <blockquote class="italic text-primary bg-black/60 p-4 border border-outline-variant border-l-4 border-l-primary-fixed text-sm">
-                            "Saber que la clave está frente a tus ojos pero está oculta en la página 4.500 de un archivo que no tienes tiempo de leer."
-                            <span class="block text-right font-mono text-xs text-slate-400 mt-1">— Analista de Inteligencia Criminal, PDI</span>
+                        <blockquote
+                            class="italic text-primary bg-black/60 p-4 border border-outline-variant border-l-4 border-l-primary-fixed text-sm">
+                            "Saber que la clave está frente a tus ojos pero está oculta en la página 4.500 de un archivo
+                            que no tienes tiempo de leer."
+                            <span class="block text-right font-mono text-xs text-slate-400 mt-1">— Analista de
+                                Inteligencia Criminal, PDI</span>
                         </blockquote>
                     </div>
                 </div>
             </section>
 
             <!-- ==================== DIAPOSITIVA 3 ==================== -->
-            <section id="slide-3" class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
-                
+            <section id="slide-3"
+                class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
+
                 <!-- Context Header -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
+                <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
                     <div>
-                        <div class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
+                        <div
+                            class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
                             LA SOLUCIÓN A TRAVÉS DEL CAMBIO
                         </div>
-                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">De la Lectura Manual al Triage Inteligente</h2>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">De la Lectura Manual al Triage
+                            Inteligente</h2>
                     </div>
-                    <div class="flex items-center gap-2 bg-[#0a192f] px-3 py-1.5 border border-outline-variant font-mono text-xs">
+                    <div
+                        class="flex items-center gap-2 bg-[#0a192f] px-3 py-1.5 border border-outline-variant font-mono text-xs">
                         <span class="w-2.5 h-2.5 bg-primary-fixed rounded-none animate-pulse"></span>
                         <span>MÓDULO: INGESTA SEMÁNTICA ACTIVA</span>
                     </div>
@@ -249,7 +296,8 @@
                 <!-- Dashboard Embedded Layout: Ingestion -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-stretch">
                     <!-- Left: Simulated Real-time Log Ingestion -->
-                    <div class="lg:col-span-5 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between relative overflow-hidden min-h-[260px]">
+                    <div
+                        class="lg:col-span-5 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between relative overflow-hidden min-h-[260px]">
                         <div class="scanline"></div>
                         <div class="flex justify-between items-center mb-3 border-b border-outline-variant pb-2">
                             <span class="font-mono text-primary text-xs flex items-center gap-2">
@@ -260,47 +308,61 @@
                         </div>
 
                         <!-- Scrolling Logs Container -->
-                        <div id="scrolling-logs" class="flex-1 space-y-2 overflow-y-hidden font-mono text-xs max-h-[180px]">
+                        <div id="scrolling-logs"
+                            class="flex-1 space-y-2 overflow-y-hidden font-mono text-xs max-h-[180px]">
                             <!-- Filled dynamically by JavaScript -->
                         </div>
-                        
-                        <div class="mt-3 bg-black/60 p-2 border border-outline-variant text-[10px] text-slate-400 flex justify-between font-mono">
+
+                        <div
+                            class="mt-3 bg-black/60 p-2 border border-outline-variant text-[10px] text-slate-400 flex justify-between font-mono">
                             <span>ENTIDADES EXTRAÍDAS: AUTÓNOMAS</span>
                             <span id="log-counter">PROCESADOS: 0</span>
                         </div>
                     </div>
 
                     <!-- Right: Neural Vector Representation (Canvas) -->
-                    <div class="lg:col-span-7 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between min-h-[260px]">
+                    <div
+                        class="lg:col-span-7 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between min-h-[260px]">
                         <div class="flex justify-between items-center mb-3">
                             <span class="font-mono text-primary text-xs">REPRESENTACIÓN NEURONAL LATENTE</span>
-                            <span class="font-mono text-[10px] bg-primary-fixed/10 text-primary-fixed px-2 py-0.5">LATENT VECTOR ENG v.4.2</span>
+                            <span
+                                class="font-mono text-[10px] bg-primary-fixed/10 text-primary-fixed px-2 py-0.5">LATENT
+                                VECTOR ENG v.4.2</span>
                         </div>
-                        
-                        <div class="flex-1 bg-black border border-outline-variant relative overflow-hidden flex items-center justify-center min-h-[140px]">
+
+                        <div
+                            class="flex-1 bg-black border border-outline-variant relative overflow-hidden flex items-center justify-center min-h-[140px]">
                             <canvas id="neural-canvas" class="w-full h-full absolute inset-0"></canvas>
-                            <div class="z-10 bg-black/85 p-3 border border-primary-fixed/30 text-center font-mono lime-glow">
-                                <span class="material-symbols-outlined text-2xl text-primary-fixed animate-spin" style="animation-duration: 3s">psychology</span>
-                                <div class="text-xs text-primary-fixed mt-1 font-bold uppercase tracking-wider">Vectorizando Narrativas Libres</div>
-                                <div class="text-[9px] text-slate-400 mt-1 uppercase">Asignando Coordenadas Multidimensionales</div>
+                            <div
+                                class="z-10 bg-black/85 p-3 border border-primary-fixed/30 text-center font-mono lime-glow">
+                                <span class="material-symbols-outlined text-2xl text-primary-fixed animate-spin"
+                                    style="animation-duration: 3s">psychology</span>
+                                <div class="text-xs text-primary-fixed mt-1 font-bold uppercase tracking-wider">
+                                    Vectorizando Narrativas Libres</div>
+                                <div class="text-[9px] text-slate-400 mt-1 uppercase">Asignando Coordenadas
+                                    Multidimensionales</div>
                             </div>
                         </div>
 
                         <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono">
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-sm text-primary-fixed shrink-0">check_circle</span>
+                                <span
+                                    class="material-symbols-outlined text-sm text-primary-fixed shrink-0">check_circle</span>
                                 <span class="text-on-surface-variant truncate">Resolución semántica de apodos</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-sm text-primary-fixed shrink-0">check_circle</span>
-                                <span class="text-on-surface-variant truncate">Unificación de relatos interinstitucionales</span>
+                                <span
+                                    class="material-symbols-outlined text-sm text-primary-fixed shrink-0">check_circle</span>
+                                <span class="text-on-surface-variant truncate">Unificación de relatos
+                                    interinstitucionales</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Strategic Slogan bottom -->
-                <div class="mt-4 pt-3 border-t border-outline-variant flex flex-col md:flex-row justify-between items-start md:items-center gap-2 text-xs">
+                <div
+                    class="mt-4 pt-3 border-t border-outline-variant flex flex-col md:flex-row justify-between items-start md:items-center gap-2 text-xs">
                     <p class="text-on-surface-variant">
                         Unificación interinstitucional autónoma y vectorización masiva de partes policiales narrativos.
                     </p>
@@ -311,17 +373,22 @@
             </section>
 
             <!-- ==================== DIAPOSITIVA 4 ==================== -->
-            <section id="slide-4" class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
-                
+            <section id="slide-4"
+                class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
+
                 <!-- Context Header -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
+                <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
                     <div>
-                        <div class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
+                        <div
+                            class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
                             EL NÚCLEO DEEP TECH
                         </div>
-                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">Motor de Triage, Similitud Semántica y LLMs</h2>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">Motor de Triage, Similitud
+                            Semántica y LLMs</h2>
                     </div>
-                    <div class="flex items-center gap-2 bg-red-950/30 px-3 py-1.5 border border-red-500/30 font-mono text-xs text-red-400">
+                    <div
+                        class="flex items-center gap-2 bg-red-950/30 px-3 py-1.5 border border-red-500/30 font-mono text-xs text-red-400">
                         <span class="w-2.5 h-2.5 bg-red-500 rounded-none animate-pulse"></span>
                         <span>ALERTA DE CONEXIÓN CRÍTICA</span>
                     </div>
@@ -329,37 +396,45 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-stretch">
                     <!-- Left: Active Corridor Satellite map -->
-                    <div class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between min-h-[260px] relative">
+                    <div
+                        class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between min-h-[260px] relative">
                         <div class="flex justify-between items-center mb-3 border-b border-outline-variant pb-2">
-                            <span class="font-mono text-xs text-primary font-bold">CORREDOR DELICTUAL DETECTADO (MAPA TÁCTICO)</span>
+                            <span class="font-mono text-xs text-primary font-bold">CORREDOR DELICTUAL DETECTADO (MAPA
+                                TÁCTICO)</span>
                             <span class="font-mono text-[10px] text-red-400">BANDA ITINERANTE</span>
                         </div>
 
                         <!-- 400x200 Aspect Ratio box: perfectly guarantees NO vertical or horizontal cuts -->
-                        <div class="flex-1 bg-black border border-outline-variant relative overflow-hidden flex items-center justify-center min-h-[160px] p-2">
+                        <div
+                            class="flex-1 bg-black border border-outline-variant relative overflow-hidden flex items-center justify-center min-h-[160px] p-2">
                             <div class="absolute inset-0 bg-[#060f17] tech-grid opacity-30"></div>
-                            
+
                             <!-- Wide-layout SVG perfectly centered inside card, map nodes have massive safe boundaries -->
                             <svg class="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet">
                                 <!-- Draw central chile schematic lines diagonally to maximize card height usage safely -->
-                                <path d="M75,20 L80,40 L110,80 L140,120 L180,160 L195,180" fill="none" stroke="#2c363f" stroke-width="3" />
-                                
+                                <path d="M75,20 L80,40 L110,80 L140,120 L180,160 L195,180" fill="none" stroke="#2c363f"
+                                    stroke-width="3" />
+
                                 <!-- Arica Node -->
                                 <circle cx="80" cy="40" r="5" fill="#dcfd8b" class="animate-ping" />
                                 <circle cx="80" cy="40" r="4" fill="#dcfd8b" />
-                                <text x="90" y="44" fill="#dcfd8b" font-family="JetBrains Mono" font-size="9" font-weight="bold">ARICA (Caso A)</text>
-                                
+                                <text x="90" y="44" fill="#dcfd8b" font-family="JetBrains Mono" font-size="9"
+                                    font-weight="bold">ARICA (Caso A)</text>
+
                                 <!-- Tactical link dashed line -->
-                                <path d="M80,40 Q130,80 180,160" fill="none" stroke="#dcfd8b" stroke-width="1.5" stroke-dasharray="4,4" />
-                                
+                                <path d="M80,40 Q130,80 180,160" fill="none" stroke="#dcfd8b" stroke-width="1.5"
+                                    stroke-dasharray="4,4" />
+
                                 <!-- Valpo Node -->
                                 <circle cx="180" cy="160" r="5" fill="#ef4444" class="animate-ping" />
                                 <circle cx="180" cy="160" r="4" fill="#ef4444" />
-                                <text x="190" y="164" fill="#ef4444" font-family="JetBrains Mono" font-size="9" font-weight="bold">VALPARAÍSO (Hoy)</text>
+                                <text x="190" y="164" fill="#ef4444" font-family="JetBrains Mono" font-size="9"
+                                    font-weight="bold">VALPARAÍSO (Hoy)</text>
                             </svg>
 
                             <!-- High fidelity responsive absolute overlay telemetry block placed cleanly on the right -->
-                            <div class="absolute right-4 bottom-4 bg-[#0a192f]/90 border border-outline-variant p-3 font-mono text-[10px] w-[145px] shadow-[0_0_15px_rgba(0,0,0,0.6)]">
+                            <div
+                                class="absolute right-4 bottom-4 bg-[#0a192f]/90 border border-outline-variant p-3 font-mono text-[10px] w-[145px] shadow-[0_0_15px_rgba(0,0,0,0.6)]">
                                 <span class="text-primary-fixed block font-bold mb-1 tracking-wider">TELEMETRÍA:</span>
                                 <div class="space-y-1 text-slate-300 text-[9px]">
                                     <div>Distancia: 1,600 Km</div>
@@ -369,60 +444,83 @@
                             </div>
                         </div>
 
-                        <div class="mt-3 bg-black/60 p-2 border border-outline-variant flex justify-between items-center text-xs font-mono">
+                        <div
+                            class="mt-3 bg-black/60 p-2 border border-outline-variant flex justify-between items-center text-xs font-mono">
                             <span class="text-primary-fixed">RESOLUCIÓN COGNITIVA ACTIVA</span>
                             <span class="bg-red-500/10 text-red-400 px-2 py-0.5">ALTO RIESGO</span>
                         </div>
                     </div>
 
                     <!-- Right: Semantic Match Table of "Coa" and technical descriptions -->
-                    <div class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between min-h-[260px]">
+                    <div
+                        class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between min-h-[260px]">
                         <div>
-                            <span class="font-mono text-xs text-primary mb-2 block font-bold">EQUIVALENCIAS SEMÁNTICAS (CHILEAN COA TO TECH)</span>
+                            <span class="font-mono text-xs text-primary mb-2 block font-bold">EQUIVALENCIAS SEMÁNTICAS
+                                (CHILEAN COA TO TECH)</span>
                             <p class="text-xs text-on-surface-variant mb-3 leading-relaxed">
-                                Traduce la jerga delictual del "coa" y descripciones físicas libres no estructuradas de distintas regiones a un vector conceptual unificado:
+                                Traduce la jerga delictual del "coa" y descripciones físicas libres no estructuradas de
+                                distintas regiones a un vector conceptual unificado:
                             </p>
                         </div>
 
-                        <div class="flex-1 bg-black border border-outline-variant overflow-x-hidden overflow-y-auto max-h-[140px]">
+                        <div
+                            class="flex-1 bg-black border border-outline-variant overflow-x-hidden overflow-y-auto max-h-[140px]">
                             <table class="w-full text-left font-mono text-xs">
                                 <thead class="bg-surface-variant/30 border-b border-outline-variant sticky top-0">
                                     <tr>
-                                        <th class="px-2 py-2 text-[10px] text-on-surface-variant font-bold">NODO A (ARICA)</th>
-                                        <th class="px-2 py-2 text-[10px] text-on-surface-variant font-bold">NODO B (VALPO)</th>
-                                        <th class="px-2 py-2 text-[10px] text-primary-fixed text-right font-bold">MATCH</th>
+                                        <th class="px-2 py-2 text-[10px] text-on-surface-variant font-bold">NODO A
+                                            (ARICA)</th>
+                                        <th class="px-2 py-2 text-[10px] text-on-surface-variant font-bold">NODO B
+                                            (VALPO)</th>
+                                        <th class="px-2 py-2 text-[10px] text-primary-fixed text-right font-bold">MATCH
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-outline-variant/30">
                                     <tr class="hover:bg-primary-fixed/5 transition-all">
-                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Sujeto con tajo en la cara"</td>
-                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Individuo con cicatriz facial"</td>
-                                        <td class="px-2 py-2 text-right"><span class="bg-[#dcfd8b]/10 text-primary-fixed px-2 py-0.5 font-bold">92%</span></td>
+                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Sujeto con
+                                            tajo en la cara"</td>
+                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Individuo
+                                            con cicatriz facial"</td>
+                                        <td class="px-2 py-2 text-right"><span
+                                                class="bg-[#dcfd8b]/10 text-primary-fixed px-2 py-0.5 font-bold">92%</span>
+                                        </td>
                                     </tr>
                                     <tr class="hover:bg-primary-fixed/5 transition-all">
-                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Huyeron en máquina gris"</td>
-                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Escaparon en sedán plateado"</td>
-                                        <td class="px-2 py-2 text-right"><span class="bg-[#dcfd8b]/10 text-primary-fixed px-2 py-0.5 font-bold">88%</span></td>
+                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Huyeron en
+                                            máquina gris"</td>
+                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Escaparon
+                                            en sedán plateado"</td>
+                                        <td class="px-2 py-2 text-right"><span
+                                                class="bg-[#dcfd8b]/10 text-primary-fixed px-2 py-0.5 font-bold">88%</span>
+                                        </td>
                                     </tr>
                                     <tr class="hover:bg-primary-fixed/5 transition-all">
-                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Utilizaron chicharra en robo"</td>
-                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Uso de inhibidor de señal"</td>
-                                        <td class="px-2 py-2 text-right"><span class="bg-[#dcfd8b]/10 text-primary-fixed px-2 py-0.5 font-bold">95%</span></td>
+                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Utilizaron
+                                            chicharra en robo"</td>
+                                        <td class="px-2 py-2 text-primary font-medium font-mono text-[11px]">"Uso de
+                                            inhibidor de señal"</td>
+                                        <td class="px-2 py-2 text-right"><span
+                                                class="bg-[#dcfd8b]/10 text-primary-fixed px-2 py-0.5 font-bold">95%</span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
                         <div class="mt-3 text-[10px] text-on-surface-variant leading-relaxed">
-                            <strong>Resolución de Entidades (Entity Resolution):</strong> Unifica identidades dispersas (nombres, apodos y rasgos) resolviendo el sesgo geográfico.
+                            <strong>Resolución de Entidades (Entity Resolution):</strong> Unifica identidades dispersas
+                            (nombres, apodos y rasgos) resolviendo el sesgo geográfico.
                         </div>
                     </div>
                 </div>
 
                 <!-- Bottom justification -->
-                <div class="mt-4 pt-3 border-t border-outline-variant flex flex-col md:flex-row justify-between gap-3 text-xs">
+                <div
+                    class="mt-4 pt-3 border-t border-outline-variant flex flex-col md:flex-row justify-between gap-3 text-xs">
                     <span class="text-on-surface-variant">
-                        <strong>Tecnología:</strong> Embeddings en español con fine-tuning para dialectos criminales de Latinoamérica.
+                        <strong>Tecnología:</strong> Embeddings en español con fine-tuning para dialectos criminales de
+                        Latinoamérica.
                     </span>
                     <span class="text-primary-fixed font-bold font-mono text-[10px] uppercase shrink-0">
                         DIFÍCIL DE REPLICAR | DEEP TECH PROPIETARIO
@@ -431,17 +529,22 @@
             </section>
 
             <!-- ==================== DIAPOSITIVA 5 ==================== -->
-            <section id="slide-5" class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
-                
+            <section id="slide-5"
+                class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
+
                 <!-- Context Header -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
+                <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
                     <div>
-                        <div class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
+                        <div
+                            class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
                             EL ECOSISTEMA E IMPACTO SISTÉMICO
                         </div>
-                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">Cadena Virtuosa de Cooperación de Datos Tácticos</h2>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">Cadena Virtuosa de Cooperación
+                            de Datos Tácticos</h2>
                     </div>
-                    <span class="bg-[#0a192f] border border-outline-variant text-[#8f9380] font-mono text-xs px-3 py-1.5">
+                    <span
+                        class="bg-[#0a192f] border border-outline-variant text-[#8f9380] font-mono text-xs px-3 py-1.5">
                         BENEFICIO SISTÉMICO: INTERINSTITUCIONAL
                     </span>
                 </div>
@@ -451,48 +554,62 @@
                     <!-- Actor Stepper Left -->
                     <div class="lg:col-span-5 flex flex-col justify-center space-y-3">
                         <p class="text-xs text-on-surface-variant mb-2">
-                            Actúa como la <strong>única fuente de verdad inteligente</strong> que vincula a los tres agentes de la persecución criminal:
+                            Actúa como la <strong>única fuente de verdad inteligente</strong> que vincula a los tres
+                            agentes de la persecución criminal:
                         </p>
 
                         <!-- Actor Node button PDI/Carabineros -->
-                        <button onclick="selectActor('actor-analistas')" id="btn-actor-analistas" class="w-full text-left p-3 bg-[#0a192f] border border-primary-fixed/50 hover:border-primary-fixed transition-all active:scale-[0.99]">
+                        <button onclick="selectActor('actor-analistas')" id="btn-actor-analistas"
+                            class="w-full text-left p-3 bg-[#0a192f] border border-primary-fixed/50 hover:border-primary-fixed transition-all active:scale-[0.99]">
                             <div class="flex items-center gap-2">
                                 <span class="material-symbols-outlined text-primary-fixed text-lg">monitoring</span>
-                                <h3 class="text-xs text-primary font-bold font-mono">1. Analistas (PDI / Carabineros)</h3>
+                                <h3 class="text-xs text-primary font-bold font-mono">1. Analistas (PDI / Carabineros)
+                                </h3>
                             </div>
                             <p class="text-[11px] text-on-surface-variant mt-2 leading-normal">
-                                Triage cognitivo y alertas proactivas. Reducción del tiempo de cruce de datos de semanas a segundos.
+                                Triage cognitivo y alertas proactivas. Reducción del tiempo de cruce de datos de semanas
+                                a segundos.
                             </p>
                         </button>
 
                         <!-- Actor Node button Fiscales -->
-                        <button onclick="selectActor('actor-fiscales')" id="btn-actor-fiscales" class="w-full text-left p-3 bg-black border border-outline-variant hover:border-primary-fixed transition-all active:scale-[0.99]">
+                        <button onclick="selectActor('actor-fiscales')" id="btn-actor-fiscales"
+                            class="w-full text-left p-3 bg-black border border-outline-variant hover:border-primary-fixed transition-all active:scale-[0.99]">
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-slate-400 text-lg" id="icon-fiscales">gavel</span>
-                                <h3 class="text-xs text-slate-400 font-bold font-mono" id="title-fiscales">2. Fiscales (Ministerio Público)</h3>
+                                <span class="material-symbols-outlined text-slate-400 text-lg"
+                                    id="icon-fiscales">gavel</span>
+                                <h3 class="text-xs text-slate-400 font-bold font-mono" id="title-fiscales">2. Fiscales
+                                    (Ministerio Público)</h3>
                             </div>
                             <p class="text-[11px] text-on-surface-variant mt-2 leading-normal">
-                                Evidencia estructurada densa y patrones de reincidencia listos para judicializar durante la ventana de flagrancia.
+                                Evidencia estructurada densa y patrones de reincidencia listos para judicializar durante
+                                la ventana de flagrancia.
                             </p>
                         </button>
 
                         <!-- Actor Node button Gobierno -->
-                        <button onclick="selectActor('actor-interior')" id="btn-actor-interior" class="w-full text-left p-3 bg-black border border-outline-variant hover:border-primary-fixed transition-all active:scale-[0.99]">
+                        <button onclick="selectActor('actor-interior')" id="btn-actor-interior"
+                            class="w-full text-left p-3 bg-black border border-outline-variant hover:border-primary-fixed transition-all active:scale-[0.99]">
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-slate-400 text-lg" id="icon-interior">policy</span>
-                                <h3 class="text-xs text-slate-400 font-bold font-mono" id="title-interior">3. Ministerio del Interior</h3>
+                                <span class="material-symbols-outlined text-slate-400 text-lg"
+                                    id="icon-interior">policy</span>
+                                <h3 class="text-xs text-slate-400 font-bold font-mono" id="title-interior">3. Ministerio
+                                    del Interior</h3>
                             </div>
                             <p class="text-[11px] text-on-surface-variant mt-2 leading-normal">
-                                Visión estratégica interregional sobre la evolución del crimen organizado en tiempo real.
+                                Visión estratégica interregional sobre la evolución del crimen organizado en tiempo
+                                real.
                             </p>
                         </button>
                     </div>
 
                     <!-- Detailed View Right -->
-                    <div class="lg:col-span-7 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between relative overflow-hidden min-h-[280px]">
+                    <div
+                        class="lg:col-span-7 bg-[#0a192f] border border-outline-variant p-4 flex flex-col justify-between relative overflow-hidden min-h-[280px]">
                         <div class="scanline"></div>
                         <div class="border-b border-outline-variant pb-2 mb-3 flex justify-between">
-                            <span class="font-mono text-xs text-primary font-bold">IMPACTO DETALLADO DEL ACTOR SELECCIONADO</span>
+                            <span class="font-mono text-xs text-primary font-bold">IMPACTO DETALLADO DEL ACTOR
+                                SELECCIONADO</span>
                             <span class="font-mono text-[10px] text-primary-fixed">VÍNCULO COGNITIVO</span>
                         </div>
 
@@ -501,24 +618,34 @@
                             <!-- Panel Analistas -->
                             <div id="panel-actor-analistas" class="space-y-4">
                                 <div class="flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-3xl text-primary-fixed bg-black p-2 border border-outline-variant shrink-0">monitoring</span>
+                                    <span
+                                        class="material-symbols-outlined text-3xl text-primary-fixed bg-black p-2 border border-outline-variant shrink-0">monitoring</span>
                                     <div>
-                                        <h4 class="text-sm md:text-base text-primary font-bold leading-none">Optimización y Triage Cognitivo</h4>
-                                        <span class="font-mono text-[9px] text-primary-fixed uppercase tracking-wider">AUDIENCIA: POLICÍA DE INVESTIGACIONES Y CARABINEROS</span>
+                                        <h4 class="text-sm md:text-base text-primary font-bold leading-none">
+                                            Optimización y Triage Cognitivo</h4>
+                                        <span
+                                            class="font-mono text-[9px] text-primary-fixed uppercase tracking-wider">AUDIENCIA:
+                                            POLICÍA DE INVESTIGACIONES Y CARABINEROS</span>
                                     </div>
                                 </div>
                                 <ul class="space-y-2 text-xs text-on-surface-variant">
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Triage Automático:</strong> Cruce inmediato de 10,000 expedientes criminales en segundos.</span>
+                                        <span
+                                            class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Triage Automático:</strong> Cruce inmediato de 10,000 expedientes
+                                            criminales en segundos.</span>
                                     </li>
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Detección de Itinerancia:</strong> Alertas antes de que la banda abandone la jurisdicción local.</span>
+                                        <span
+                                            class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Detección de Itinerancia:</strong> Alertas antes de que la banda
+                                            abandone la jurisdicción local.</span>
                                     </li>
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Descompresión Administrativa:</strong> Los analistas pasan de transcribir a investigar.</span>
+                                        <span
+                                            class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Descompresión Administrativa:</strong> Los analistas pasan de
+                                            transcribir a investigar.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -526,24 +653,34 @@
                             <!-- Panel Fiscales -->
                             <div id="panel-actor-fiscales" class="hidden space-y-4">
                                 <div class="flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-3xl text-red-400 bg-black p-2 border border-outline-variant shrink-0">gavel</span>
+                                    <span
+                                        class="material-symbols-outlined text-3xl text-red-400 bg-black p-2 border border-outline-variant shrink-0">gavel</span>
                                     <div>
-                                        <h4 class="text-sm md:text-base text-primary font-bold leading-none">Persecución Penal Estratégica</h4>
-                                        <span class="font-mono text-[9px] text-red-400 uppercase tracking-wider">AUDIENCIA: FISCALÍA GENERAL / MINISTERIO PÚBULICO</span>
+                                        <h4 class="text-sm md:text-base text-primary font-bold leading-none">Persecución
+                                            Penal Estratégica</h4>
+                                        <span
+                                            class="font-mono text-[9px] text-red-400 uppercase tracking-wider">AUDIENCIA:
+                                            FISCALÍA GENERAL / MINISTERIO PÚBULICO</span>
                                     </div>
                                 </div>
                                 <ul class="space-y-2 text-xs text-on-surface-variant">
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-red-400 material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Prevención de Archivo Temprano:</strong> Evidencia densa para justificar la prisión preventiva.</span>
+                                        <span
+                                            class="text-red-400 material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Prevención de Archivo Temprano:</strong> Evidencia densa para
+                                            justificar la prisión preventiva.</span>
                                     </li>
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-red-400 material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Agrupación de Causas:</strong> Unifica causas menores en investigación por asociación ilícita.</span>
+                                        <span
+                                            class="text-red-400 material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Agrupación de Causas:</strong> Unifica causas menores en
+                                            investigación por asociación ilícita.</span>
                                     </li>
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-red-400 material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Firma Digital Criptográfica:</strong> Integridad del reporte semántico para presentación en juicio oral.</span>
+                                        <span
+                                            class="text-red-400 material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Firma Digital Criptográfica:</strong> Integridad del reporte
+                                            semántico para presentación en juicio oral.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -551,49 +688,65 @@
                             <!-- Panel Interior -->
                             <div id="panel-actor-interior" class="hidden space-y-4">
                                 <div class="flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-3xl text-primary-fixed bg-black p-2 border border-outline-variant shrink-0">policy</span>
+                                    <span
+                                        class="material-symbols-outlined text-3xl text-primary-fixed bg-black p-2 border border-outline-variant shrink-0">policy</span>
                                     <div>
-                                        <h4 class="text-sm md:text-base text-primary font-bold leading-none">Gobernanza de Seguridad Pública</h4>
-                                        <span class="font-mono text-[9px] text-primary-fixed uppercase tracking-wider">AUDIENCIA: MINISTERIO DEL INTERIOR / SUBSECRETARÍAS</span>
+                                        <h4 class="text-sm md:text-base text-primary font-bold leading-none">Gobernanza
+                                            de Seguridad Pública</h4>
+                                        <span
+                                            class="font-mono text-[9px] text-primary-fixed uppercase tracking-wider">AUDIENCIA:
+                                            MINISTERIO DEL INTERIOR / SUBSECRETARÍAS</span>
                                     </div>
                                 </div>
                                 <ul class="space-y-2 text-xs text-on-surface-variant">
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Eficiencia Presupuestaria:</strong> Focalización de patrullajes en corredores logísticos reales.</span>
+                                        <span
+                                            class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Eficiencia Presupuestaria:</strong> Focalización de patrullajes en
+                                            corredores logísticos reales.</span>
                                     </li>
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Soberanía Tecnológica:</strong> Sistema entrenado en dialectos locales sin depender de nubes extranjeras.</span>
+                                        <span
+                                            class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Soberanía Tecnológica:</strong> Sistema entrenado en dialectos
+                                            locales sin depender de nubes extranjeras.</span>
                                     </li>
                                     <li class="flex gap-2 items-start">
-                                        <span class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
-                                        <span><strong>Toma de Decisiones:</strong> Estadísticas de Modus Operandi y evolución del crimen en vivo.</span>
+                                        <span
+                                            class="text-primary-fixed material-symbols-outlined text-sm mt-0.5 shrink-0">check_circle</span>
+                                        <span><strong>Toma de Decisiones:</strong> Estadísticas de Modus Operandi y
+                                            evolución del crimen en vivo.</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="mt-3 bg-black/60 p-2 border border-outline-variant text-[10px] text-slate-400">
-                            Nota: La interoperabilidad autónoma optimiza la eficiencia de todo el ecosistema penal chileno.
+                            Nota: La interoperabilidad autónoma optimiza la eficiencia de todo el ecosistema penal
+                            chileno.
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- ==================== DIAPOSITIVA 6 ==================== -->
-            <section id="slide-6" class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
+            <section id="slide-6"
+                class="slide-container slide-hidden bg-black flex flex-col justify-between p-8 border border-outline-variant">
                 <div class="absolute inset-0 bg-primary-fixed/5 blur-[120px] rounded-full pointer-events-none"></div>
 
                 <!-- Context Header -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
+                <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant pb-4 mb-4 gap-4">
                     <div>
-                        <div class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
+                        <div
+                            class="inline-block bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 px-3 py-1 font-mono text-xs mb-1">
                             CIERRE Y LLAMADO A INVERTIR
                         </div>
-                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">Devolviendo la Justicia a las Comunidades</h2>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold uppercase">Devolviendo la Justicia a las
+                            Comunidades</h2>
                     </div>
-                    <div class="flex items-center gap-2 bg-[#00689D]/20 px-3 py-1.5 border border-[#00689D]/40 font-mono text-xs text-white">
+                    <div
+                        class="flex items-center gap-2 bg-[#00689D]/20 px-3 py-1.5 border border-[#00689D]/40 font-mono text-xs text-white">
                         <span>ODS 16 ALINEADO</span>
                     </div>
                 </div>
@@ -604,9 +757,11 @@
                         <h3 class="text-2xl md:text-3xl text-primary font-extrabold uppercase leading-tight">
                             Preparados para Piloto Operativo en la Macrozona Central
                         </h3>
-                        
+
                         <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed">
-                            Contamos con un modelo entrenado y listo para validarse en el terreno real. Invitamos a inversionistas estratégicos y tomadores de decisiones a sumarse a la tecnología que merece existir.
+                            Contamos con un modelo entrenado y listo para validarse en el terreno real. Invitamos a
+                            inversionistas estratégicos y tomadores de decisiones a sumarse a la tecnología que merece
+                            existir.
                         </p>
 
                         <!-- Technical Status Badges -->
@@ -618,14 +773,19 @@
                                     <span class="font-mono text-[9px] text-slate-400">ESTADO DEL PROYECTO</span>
                                 </div>
                                 <div class="font-mono text-base text-primary font-bold uppercase">TRL 2 VALIDADO</div>
-                                <p class="text-[10px] text-on-surface-variant mt-2 leading-relaxed">Concepto y motor de algoritmos de coincidencia probados en laboratorio.</p>
+                                <p class="text-[10px] text-on-surface-variant mt-2 leading-relaxed">Concepto y motor de
+                                    algoritmos de coincidencia probados en laboratorio.</p>
                             </div>
 
                             <!-- ODS 16 Badge -->
                             <div class="bg-[#00689d]/10 border border-[#00689d]/40 p-4 relative flex gap-3">
-                                <div class="w-10 h-10 shrink-0 bg-[#00689D] flex items-center justify-center border border-white/20">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+                                <div
+                                    class="w-10 h-10 shrink-0 bg-[#00689D] flex items-center justify-center border border-white/20">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="text-white">
+                                        <path
+                                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
                                     </svg>
                                 </div>
                                 <div>
@@ -638,43 +798,57 @@
                     </div>
 
                     <!-- Technical Investment Lead Form Right -->
-                    <div class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-6 relative flex flex-col justify-between min-h-[260px]">
+                    <div
+                        class="lg:col-span-6 bg-[#0a192f] border border-outline-variant p-6 relative flex flex-col justify-between min-h-[260px]">
                         <div class="scanline"></div>
-                        <span class="font-mono text-xs text-primary border-b border-outline-variant pb-2 mb-3 block font-bold">SOLICITUD DE REUNIÓN PARA PILOTO</span>
+                        <span
+                            class="font-mono text-xs text-primary border-b border-outline-variant pb-2 mb-3 block font-bold">SOLICITUD
+                            DE REUNIÓN PARA PILOTO</span>
 
                         <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-3 text-xs">
                             <div>
-                                <label class="font-mono text-on-surface-variant mb-1 block">NOMBRE / ENTIDAD INTERESADA</label>
-                                <input required type="text" class="w-full bg-black border border-outline-variant text-primary px-3 py-2 focus:border-primary-fixed focus:ring-0 text-xs" placeholder="Ej: Dirección de Seguridad, I. Municipalidad" />
+                                <label class="font-mono text-on-surface-variant mb-1 block">NOMBRE / ENTIDAD
+                                    INTERESADA</label>
+                                <input required type="text"
+                                    class="w-full bg-black border border-outline-variant text-primary px-3 py-2 focus:border-primary-fixed focus:ring-0 text-xs"
+                                    placeholder="Ej: Dirección de Seguridad, I. Municipalidad" />
                             </div>
                             <div>
-                                <label class="font-mono text-on-surface-variant mb-1 block">CORREO CORPORATIVO / DE GOBIERNO</label>
-                                <input required type="email" class="w-full bg-black border border-outline-variant text-primary px-3 py-2 focus:border-primary-fixed focus:ring-0 text-xs" placeholder="Ej: director@seguridadpublica.cl" />
+                                <label class="font-mono text-on-surface-variant mb-1 block">CORREO CORPORATIVO / DE
+                                    GOBIERNO</label>
+                                <input required type="email"
+                                    class="w-full bg-black border border-outline-variant text-primary px-3 py-2 focus:border-primary-fixed focus:ring-0 text-xs"
+                                    placeholder="Ej: director@seguridadpublica.cl" />
                             </div>
                             <div>
                                 <label class="font-mono text-on-surface-variant mb-1 block">TIPO DE SOLICITUD</label>
-                                <select class="w-full bg-black border border-outline-variant text-primary px-3 py-2 focus:border-primary-fixed focus:ring-0 text-xs font-mono">
+                                <select
+                                    class="w-full bg-black border border-outline-variant text-primary px-3 py-2 focus:border-primary-fixed focus:ring-0 text-xs font-mono">
                                     <option class="bg-black">Inversión Semilla Táctico (Deep Tech)</option>
                                     <option class="bg-black">Implementación Piloto Carabineros / PDI</option>
                                     <option class="bg-black">Suscripción Estratégica (Municipio / Gobierno)</option>
                                 </select>
                             </div>
-                            <button type="submit" class="w-full bg-primary-fixed text-black font-mono py-2.5 font-bold hover:brightness-110 transition-all uppercase tracking-wider">
+                            <button type="submit"
+                                class="w-full bg-primary-fixed text-black font-mono py-2.5 font-bold hover:brightness-110 transition-all uppercase tracking-wider">
                                 AGENDAR CONEXIÓN PILOTO
                             </button>
                         </form>
-                        
+
                         <!-- Successful simulated output -->
                         <div id="form-success" class="hidden text-center space-y-4 py-6">
-                            <span class="material-symbols-outlined text-4xl text-primary-fixed animate-bounce">verified_user</span>
+                            <span
+                                class="material-symbols-outlined text-4xl text-primary-fixed animate-bounce">verified_user</span>
                             <h4 class="text-sm text-primary font-bold">SOLICITUD ENVIADA CON ÉXITO</h4>
-                            <p class="text-xs text-on-surface-variant leading-relaxed">Un oficial de enlace de Cerebro Analítico se comunicará de forma segura en las próximas 12 horas hábiles.</p>
+                            <p class="text-xs text-on-surface-variant leading-relaxed">Un oficial de enlace de Cerebro
+                                Analítico se comunicará de forma segura en las próximas 12 horas hábiles.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bottom phrase -->
-                <div class="mt-4 pt-3 border-t border-outline-variant flex flex-col md:flex-row justify-between text-[10px] text-slate-400 gap-2">
+                <div
+                    class="mt-4 pt-3 border-t border-outline-variant flex flex-col md:flex-row justify-between text-[10px] text-slate-400 gap-2">
                     <span>© 2026 CEREBRO ANALÍTICO. TECNOLOGÍA DISEÑADA PARA LA SOBERANÍA NACIONAL.</span>
                     <span class="text-primary-fixed font-bold">PITCH SECURE CONNECTION | LEVEL: SECRET</span>
                 </div>
@@ -686,40 +860,54 @@
     <footer class="w-full bg-black border-t border-outline-variant py-4 z-40">
         <div class="max-w-screen-2xl mx-auto px-6 md:px-12">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                
+
                 <!-- Slide List indicators without times -->
                 <div class="w-full grid grid-cols-3 md:grid-cols-6 gap-2 font-mono text-[10px] text-center">
-                    
-                    <button onclick="goToSlide(1)" id="indicator-1" class="border-t-2 border-primary-fixed pt-3 flex flex-col items-center group transition-all text-primary font-bold">
-                        <span class="text-primary uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">1. Portada</span>
+
+                    <button onclick="goToSlide(1)" id="indicator-1"
+                        class="border-t-2 border-primary-fixed pt-3 flex flex-col items-center group transition-all text-primary font-bold">
+                        <span
+                            class="text-primary uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">1.
+                            Portada</span>
                     </button>
-                    
-                    <button onclick="goToSlide(2)" id="indicator-2" class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
-                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">2. El Dolor</span>
+
+                    <button onclick="goToSlide(2)" id="indicator-2"
+                        class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
+                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">2. El
+                            Dolor</span>
                     </button>
-                    
-                    <button onclick="goToSlide(3)" id="indicator-3" class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
-                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">3. La Solución</span>
+
+                    <button onclick="goToSlide(3)" id="indicator-3"
+                        class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
+                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">3. La
+                            Solución</span>
                     </button>
-                    
-                    <button onclick="goToSlide(4)" id="indicator-4" class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
-                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">4. Deep Tech</span>
+
+                    <button onclick="goToSlide(4)" id="indicator-4"
+                        class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
+                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">4. Deep
+                            Tech</span>
                     </button>
-                    
-                    <button onclick="goToSlide(5)" id="indicator-5" class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
-                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">5. Ecosistema</span>
+
+                    <button onclick="goToSlide(5)" id="indicator-5"
+                        class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
+                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">5.
+                            Ecosistema</span>
                     </button>
-                    
-                    <button onclick="goToSlide(6)" id="indicator-6" class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
-                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">6. Cierre</span>
+
+                    <button onclick="goToSlide(6)" id="indicator-6"
+                        class="border-t-2 border-outline-variant pt-3 flex flex-col items-center group transition-all text-slate-400">
+                        <span class="uppercase tracking-wider group-hover:text-primary-fixed truncate w-full">6.
+                            Cierre</span>
                     </button>
-                    
+
                 </div>
             </div>
 
             <!-- Visual micro progress bar indicator -->
             <div class="w-full h-[2px] bg-neutral-900 mt-4 relative overflow-hidden">
-                <div id="slide-progress-line" class="h-full bg-primary-fixed w-[16.66%] transition-all duration-300"></div>
+                <div id="slide-progress-line" class="h-full bg-primary-fixed w-[16.66%] transition-all duration-300">
+                </div>
             </div>
         </div>
     </footer>
@@ -739,7 +927,7 @@
         let currentSlideIndex = 0;
         let isAutoplayRunning = false;
         let pitchIntervalId = null;
-        
+
         let secondsElapsed = 0;
         const totalSecsLimit = 180; // 3 minutes total
 
@@ -783,18 +971,18 @@
         function animateNeuralNet() {
             if (!canvas || !ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             // Draw nodes
             ctx.fillStyle = '#dcfd8b';
             nodes.forEach(node => {
                 ctx.beginPath();
                 ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
                 ctx.fill();
-                
+
                 // Move nodes
                 node.x += node.vx;
                 node.y += node.vy;
-                
+
                 // Wall collisions
                 if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
                 if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
@@ -821,15 +1009,15 @@
         function addSimulatedLog() {
             const logsContainer = document.getElementById('scrolling-logs');
             if (!logsContainer) return;
-            
+
             const log = sampleLogs[Math.floor(Math.random() * sampleLogs.length)];
             const logEl = document.createElement('div');
             logEl.className = 'p-2 bg-black border-l-2 border-primary-fixed/40 hover:border-primary-fixed transition-all flex flex-col gap-1 break-words whitespace-normal';
-            
+
             const header = document.createElement('span');
             header.className = 'text-[9px] text-primary-fixed block font-bold';
             header.textContent = `SOURCE: ${log.src} [STATUS: VECTORIZED]`;
-            
+
             const bodyText = document.createElement('p');
             bodyText.className = 'text-primary leading-normal text-xs';
             bodyText.textContent = log.txt;
@@ -841,7 +1029,7 @@
             if (logsContainer.children.length > 3) {
                 logsContainer.removeChild(logsContainer.firstChild);
             }
-            
+
             processedLogsCount++;
             document.getElementById('log-counter').textContent = `PROCESADOS: ${processedLogsCount}`;
         }
@@ -855,7 +1043,7 @@
                     const hours = Math.floor(timeRemaining / 3600);
                     const minutes = Math.floor((timeRemaining % 3600) / 60);
                     const seconds = timeRemaining % 60;
-                    
+
                     const pad = (n) => String(n).padStart(2, '0');
                     const clockEl = document.getElementById('countdown-clock');
                     if (clockEl) {
@@ -897,7 +1085,7 @@
         // Global slide manager
         function goToSlide(slideNum) {
             currentSlideIndex = slideNum - 1;
-            
+
             // Hide the next suggest button immediately on navigation
             hideNextSuggestionButton();
 
@@ -943,14 +1131,14 @@
                 pausePitchAutoplay();
                 return;
             }
-            
+
             isAutoplayRunning = true;
             document.getElementById('autoplay-text').textContent = "PAUSAR PITCH";
             document.getElementById('autoplay-icon').textContent = "pause";
-            
+
             // Hide pause notification toast
             document.getElementById('toast-paused').classList.add('opacity-0');
-            
+
             // Core slide transition loop
             pitchIntervalId = setInterval(() => {
                 secondsElapsed++;
@@ -972,9 +1160,9 @@
             isAutoplayRunning = false;
             document.getElementById('autoplay-text').textContent = "REANUDAR PITCH";
             document.getElementById('autoplay-icon').textContent = "play_arrow";
-            
+
             if (pitchIntervalId) clearInterval(pitchIntervalId);
-            
+
             // Display Pause Notification Alert Toast to show high-fidelity feedback (only if suggestion button is not visible)
             const nextBtn = document.getElementById('next-suggestion-btn');
             if (nextBtn.classList.contains('opacity-0')) {
@@ -1015,13 +1203,13 @@
             actorsList.forEach(act => {
                 const btn = document.getElementById(`btn-actor-${act}`);
                 btn.className = "w-full text-left p-3 bg-black border border-outline-variant hover:border-primary-fixed transition-all active:scale-[0.99]";
-                
+
                 const title = document.getElementById(`title-${act}`);
                 if (title) {
                     title.classList.remove('text-primary');
                     title.classList.add('text-slate-400');
                 }
-                
+
                 const icon = document.getElementById(`icon-${act}`);
                 if (icon) {
                     icon.classList.remove('text-primary-fixed');
@@ -1035,10 +1223,10 @@
             // Set current selected active node styles
             const selectedBtn = document.getElementById(`btn-actor-${actorId.split('-')[1]}`);
             selectedBtn.className = "w-full text-left p-3 bg-[#0a192f] border border-primary-fixed/50 transition-all active:scale-[0.99]";
-            
+
             const activeSpan = selectedBtn.querySelector('h3');
             activeSpan.className = "text-xs text-primary font-bold font-mono";
-            
+
             const activeIcon = selectedBtn.querySelector('span');
             activeIcon.className = "material-symbols-outlined text-primary-fixed text-lg";
 
@@ -1073,10 +1261,10 @@
         window.addEventListener('load', () => {
             // Start clock countdown
             startCountdown();
-            
+
             // Build dynamic logs loop interval
             setInterval(addSimulatedLog, 2500);
-            
+
             // Connect neural network vectors canvas
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
